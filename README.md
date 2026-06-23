@@ -99,4 +99,4 @@ Dashboard Airtable
 
 ## Équipe
 
-Projet réalisé par [Chaimaa], [Ivan], [Julie], [Leaticia], [Suzanne].
+Projet réalisé par Chaimaa, Ivan, Julie, Leaticia, Suzanne.
