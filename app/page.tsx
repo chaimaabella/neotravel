@@ -13,8 +13,12 @@ export default function Home() {
         className="nt-rise"
         style={{
           ...wrap,
-          padding: "clamp(40px,6vw,68px) clamp(16px,4vw,40px) clamp(28px,4vw,40px)",
+          padding: "clamp(48px,7vw,92px) clamp(16px,4vw,40px) clamp(48px,6vw,76px)",
           position: "relative",
+          minHeight: "clamp(480px,72vh,720px)",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
         }}
       >
         <div
@@ -121,17 +125,26 @@ export default function Home() {
 
       {/* BOARD STRIP */}
       <div style={{ background: "var(--navy)", color: "#fff" }}>
-        <div style={{ ...wrap, padding: "0 clamp(16px,4vw,40px)", display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(220px,1fr))" }}>
-          {[
-            ["1 → 85", "Passagers par demande"],
-            ["~10 s", "Pour un devis détaillé"],
-            ["TVA 10 %", "Transport de voyageurs"],
-          ].map(([big, small]) => (
-            <div key={big} style={{ padding: "26px 0" }}>
-              <div style={{ fontWeight: 900, fontSize: 30, color: "var(--accent)" }}>{big}</div>
-              <div style={{ fontSize: 12.5, color: "#9fb0cc", marginTop: 5, textTransform: "uppercase", letterSpacing: ".03em", fontWeight: 600 }}>{small}</div>
-            </div>
-          ))}
+        <div style={{ ...wrap, padding: "0 clamp(16px,4vw,40px)" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(200px,1fr))" }}>
+            {[
+              ["1 → 85", "Passagers par demande"],
+              ["~10 s", "Pour un devis détaillé"],
+              ["TVA 10 %", "Transport de voyageurs"],
+            ].map(([big, small], i) => (
+              <div
+                key={big}
+                style={{
+                  padding: "30px clamp(14px,2.5vw,32px)",
+                  paddingLeft: i === 0 ? 0 : undefined,
+                  borderLeft: i > 0 ? "1px solid rgba(255,255,255,.14)" : undefined,
+                }}
+              >
+                <div style={{ fontWeight: 900, fontSize: 32, color: "var(--accent)" }}>{big}</div>
+                <div style={{ fontSize: 12.5, color: "#9fb0cc", marginTop: 6, textTransform: "uppercase", letterSpacing: ".03em", fontWeight: 600 }}>{small}</div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 

@@ -23,8 +23,13 @@ const SUGGESTIONS = [
 
 const prettyField = (f: string) => f.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
 
+const GREETING_TEXT =
+  "Bonjour ! Décrivez votre besoin (groupe, trajet, dates) et je vous chiffre un devis, ou je vous dis ce qu'il me manque.";
+
 let counter = 100;
 const nid = () => ++counter;
+const newSession = () =>
+  typeof crypto !== "undefined" && crypto.randomUUID ? crypto.randomUUID() : String(nid());
 
 export interface ChatPanelHandle {
   send: (message: string) => void;
@@ -39,14 +44,7 @@ export const ChatPanel = forwardRef<ChatPanelHandle, { onClose?: () => void }>(f
   { onClose },
   ref,
 ) {
-  const [messages, setMessages] = useState<Msg[]>([
-    {
-      id: 1,
-      kind: "botText",
-      text:
-        "Bonjour ! Décrivez votre besoin (groupe, trajet, dates) et je vous chiffre un devis, ou je vous dis ce qu'il me manque.",
-    },
-  ]);
+  const [messages, setMessages] = useState<Msg[]>([{ id: 1, kind: "botText", text: GREETING_TEXT }]);
   const [input, setInput] = useState("");
   const [typing, setTyping] = useState(false);
   const session = useRef<string>("");
@@ -54,9 +52,15 @@ export const ChatPanel = forwardRef<ChatPanelHandle, { onClose?: () => void }>(f
   const sendRef = useRef<(m: string) => void>(() => {});
 
   useEffect(() => {
-    session.current =
-      typeof crypto !== "undefined" && crypto.randomUUID ? crypto.randomUUID() : String(Date.now());
+    session.current = newSession();
   }, []);
+
+  function reset() {
+    session.current = newSession();
+    setInput("");
+    setTyping(false);
+    setMessages([{ id: nid(), kind: "botText", text: GREETING_TEXT }]);
+  }
 
   // Expose send() au widget (messages pré-remplis), toujours avec le dernier état.
   sendRef.current = send;
@@ -104,8 +108,11 @@ export const ChatPanel = forwardRef<ChatPanelHandle, { onClose?: () => void }>(f
             <span className="nt-pulse" style={{ width: 7, height: 7, borderRadius: "50%", background: "#5dd08a" }} />En ligne · répond au moteur
           </div>
         </div>
+        <button onClick={reset} aria-label="Réinitialiser la conversation" title="Nouvelle conversation" className="nt-btn" style={{ width: 30, height: 30, borderRadius: "50%", border: "none", background: "rgba(255,255,255,.12)", color: "#fff", fontSize: 20, cursor: "pointer", lineHeight: 1, flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
+          ↻
+        </button>
         {onClose && (
-          <button onClick={onClose} aria-label="Fermer l'assistant" className="nt-btn" style={{ width: 30, height: 30, borderRadius: "50%", border: "none", background: "rgba(255,255,255,.12)", color: "#fff", fontSize: 18, cursor: "pointer", lineHeight: 1, flexShrink: 0 }}>
+          <button onClick={onClose} aria-label="Fermer l'assistant" className="nt-btn" style={{ width: 30, height: 30, borderRadius: "50%", border: "none", background: "rgba(255,255,255,.12)", color: "#fff", fontSize: 16, cursor: "pointer", lineHeight: 1, flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
             ✕
           </button>
         )}
@@ -114,7 +121,7 @@ export const ChatPanel = forwardRef<ChatPanelHandle, { onClose?: () => void }>(f
       {/* messages */}
       <div ref={scrollRef} style={{ flex: 1, overflowY: "auto", padding: 18, display: "flex", flexDirection: "column", gap: 12, background: "var(--surface)" }}>
         {messages.map((m) => (
-          <div key={m.id} className="nt-msg">
+          <div key={m.id} className="nt-msg" style={{ display: "flex", flexDirection: "column" }}>
             <Bubble m={m} />
           </div>
         ))}
