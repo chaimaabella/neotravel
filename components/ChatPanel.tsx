@@ -40,10 +40,8 @@ export interface ChatPanelHandle {
  * Réutilisé par la page et par le popover ; expose send() via ref pour les messages
  * pré-remplis (champ du hero, CTA…).
  */
-export const ChatPanel = forwardRef<ChatPanelHandle, { onClose?: () => void }>(function ChatPanel(
-  { onClose },
-  ref,
-) {
+export const ChatPanel = forwardRef<ChatPanelHandle, { onClose?: () => void; onReply?: (data: unknown) => void }>(
+  function ChatPanel({ onClose, onReply }, ref) {
   const [messages, setMessages] = useState<Msg[]>([{ id: 1, kind: "botText", text: GREETING_TEXT }]);
   const [input, setInput] = useState("");
   const [typing, setTyping] = useState(false);
@@ -89,6 +87,7 @@ export const ChatPanel = forwardRef<ChatPanelHandle, { onClose?: () => void }>(f
         body: JSON.stringify({ message: text, session_id: session.current, history }),
       });
       const data = await res.json();
+      onReply?.(data);
       setMessages((m) => [...m, ...mapReply(data)]);
     } catch {
       setMessages((m) => [...m, { id: nid(), kind: "botText", text: "Une erreur réseau est survenue. Réessayez." }]);

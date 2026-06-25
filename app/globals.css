@@ -190,3 +190,16 @@ input[type="range"]::-moz-range-thumb {
   .nt-card:hover, .nt-btn:active, .nt-bubble:hover { transform: none; }
   .nt-pop, .nt-pop--open { transition: opacity 0.12s ease; transform: none; }
 }
+
+/* Conversation centrale de la landing : chat + panneau infos détectées */
+.nt-landing-chat {
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
+  gap: 18px;
+  align-items: stretch;
+}
+@media (max-width: 880px) {
+  .nt-landing-chat {
+    grid-template-columns: 1fr;
+  }
+}

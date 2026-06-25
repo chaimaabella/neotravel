@@ -1,5 +1,6 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { ChatPanel, type ChatPanelHandle } from "@/components/ChatPanel";
 import { OPEN_ASSISTANT_EVENT } from "@/lib/assistant-bus";
@@ -12,6 +13,9 @@ import { OPEN_ASSISTANT_EVENT } from "@/lib/assistant-bus";
 export function AssistantWidget() {
   const [open, setOpen] = useState(false);
   const panel = useRef<ChatPanelHandle>(null);
+  // Sur la landing, la conversation est déjà centrale : pas de bulle (le popover
+  // reste accessible via le CTA). Sur les autres pages, la bulle est présente.
+  const hideBubble = usePathname() === "/";
 
   useEffect(() => {
     function onOpen(e: Event) {
@@ -35,8 +39,8 @@ export function AssistantWidget() {
 
   return (
     <div className="nt-noprint">
-      {/* Bulle (cachée quand le popover est ouvert) */}
-      {!open && (
+      {/* Bulle (cachée quand le popover est ouvert ou sur la landing) */}
+      {!open && !hideBubble && (
         <button
           onClick={() => setOpen(true)}
           aria-label="Ouvrir l'assistant"

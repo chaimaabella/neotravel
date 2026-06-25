@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { HeroChatInput } from "@/components/HeroChatInput";
+import { LandingChat } from "@/components/LandingChat";
 import { OpenAssistantButton } from "@/components/OpenAssistantButton";
 
 const mono = "var(--font-jetbrains), monospace";
@@ -13,31 +13,10 @@ export default function Home() {
         className="nt-rise"
         style={{
           ...wrap,
-          padding: "clamp(48px,7vw,92px) clamp(16px,4vw,40px) clamp(48px,6vw,76px)",
+          padding: "clamp(40px,6vw,72px) clamp(16px,4vw,40px) clamp(40px,5vw,60px)",
           position: "relative",
-          minHeight: "clamp(480px,72vh,720px)",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
         }}
       >
-        <div
-          style={{
-            position: "absolute",
-            top: "clamp(34px,5vw,54px)",
-            right: "clamp(16px,4vw,40px)",
-            background: "var(--navy)",
-            color: "var(--accent)",
-            padding: "13px 15px",
-            textAlign: "center",
-            border: "2px solid var(--navy)",
-          }}
-        >
-          <div style={{ fontWeight: 900, fontSize: "clamp(26px,4vw,34px)", lineHeight: 0.85 }}>0%</div>
-          <div style={{ fontWeight: 800, fontSize: 12, letterSpacing: ".06em" }}>IA</div>
-          <div style={{ fontFamily: mono, fontSize: 8, color: "#fff", marginTop: 4 }}>DANS LE PRIX</div>
-        </div>
-
         <div
           style={{
             display: "inline-flex",
@@ -85,42 +64,28 @@ export default function Home() {
           style={{
             fontSize: "clamp(15px,2vw,18px)",
             lineHeight: 1.5,
-            maxWidth: 600,
+            maxWidth: 680,
             margin: "0 0 28px",
             color: "var(--muted)",
             fontWeight: 500,
           }}
         >
-          Aucune IA ne fixe votre tarif. Une formule unique, transparente et auditable. Mêmes
-          informations, même prix, pour tout le monde. Du minibus à l&apos;autocar grand tourisme,
-          de 1 à 85 passagers.
+          Décrivez votre besoin en une phrase : l&apos;assistant qualifie la demande et coche les
+          informations au fil de l&apos;échange. Aucune IA ne fixe le prix, il reste 100 %
+          déterministe.
         </p>
 
-        {/* Route line */}
-        <div style={{ display: "flex", alignItems: "center", gap: 0, maxWidth: 560, marginBottom: 30 }}>
-          <div>
-            <div style={{ width: 14, height: 14, borderRadius: "50%", background: "var(--ink)" }} />
-            <div style={{ fontFamily: mono, fontSize: 10.5, fontWeight: 700, marginTop: 7 }}>DÉPART</div>
-          </div>
-          <div
-            style={{
-              flex: 1,
-              height: 3,
-              background:
-                "repeating-linear-gradient(90deg,var(--ink),var(--ink) 9px,transparent 9px,transparent 16px)",
-              margin: "0 12px 18px",
-              position: "relative",
-            }}
-          >
-            <span style={{ position: "absolute", right: -2, top: -8, fontSize: 15 }}>▶</span>
-          </div>
-          <div style={{ textAlign: "right" }}>
-            <div style={{ width: 14, height: 14, borderRadius: "50%", background: "var(--accent)", border: "2px solid var(--bd)", marginLeft: "auto" }} />
-            <div style={{ fontFamily: mono, fontSize: 10.5, fontWeight: 700, marginTop: 7 }}>DESTINATION</div>
-          </div>
-        </div>
+        <LandingChat />
 
-        <HeroChatInput />
+        <p style={{ fontSize: 13, color: "var(--muted)", marginTop: 16 }}>
+          Vous préférez les détails ?{" "}
+          <Link
+            href="/devis"
+            style={{ color: "var(--ink)", fontWeight: 700, textDecoration: "underline", textDecorationColor: "var(--accent)", textUnderlineOffset: 3 }}
+          >
+            Ouvrir le simulateur →
+          </Link>
+        </p>
       </section>
 
       {/* BOARD STRIP */}
