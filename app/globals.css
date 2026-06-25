@@ -3,7 +3,7 @@
 /* ============================================================
    NeoTravel · Design system (DA "atelier/industriel")
    Source : Direction Artistique / NeoTravel.dc.html
-   Jaune #FFD400 + Navy #16233E · Archivo + JetBrains Mono
+   Accent #0bb99b + Navy #16233E · Archivo + JetBrains Mono
    ============================================================ */
 
 :root {
@@ -15,7 +15,7 @@
   --line: #e2e5ea;
   --field: #ffffff;
   /* Constantes de marque (identiques en clair/sombre) */
-  --accent: #ffd400;
+  --accent: #0bb99b;
   --on-accent: #16233e;
   --navy: #16233e;
   --ok: #00853e;
