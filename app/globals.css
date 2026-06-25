@@ -135,3 +135,58 @@ input[type="range"]::-moz-range-thumb {
     display: none !important;
   }
 }
+
+/* ===== Animations (légères, pro, accessibles) ===================== */
+@keyframes nt-rise {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes nt-msg-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes nt-bubble-in {
+  from { opacity: 0; transform: translateY(14px) scale(0.9); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes nt-pulse-ring {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(93, 208, 138, 0.5); }
+  70% { box-shadow: 0 0 0 6px rgba(93, 208, 138, 0); }
+}
+
+.nt-rise { animation: nt-rise 0.55s cubic-bezier(0.22, 0.61, 0.36, 1) both; }
+.nt-msg { animation: nt-msg-in 0.32s ease both; }
+.nt-pulse { animation: nt-pulse-ring 2.2s ease-out infinite; }
+
+.nt-bubble { animation: nt-bubble-in 0.4s cubic-bezier(0.22, 0.61, 0.36, 1) both; transition: transform 0.18s ease; }
+.nt-bubble:hover { transform: translateY(-2px); }
+
+.nt-card { transition: transform 0.2s ease, box-shadow 0.2s ease; }
+.nt-card:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1); }
+
+.nt-btn { transition: transform 0.14s ease, opacity 0.14s ease, filter 0.14s ease; }
+.nt-btn:hover { filter: brightness(1.05); }
+.nt-btn:active { transform: translateY(1px) scale(0.99); }
+
+/* Popover assistant : ouverture / fermeture animées */
+.nt-pop {
+  opacity: 0;
+  transform: translateY(16px) scale(0.97);
+  transform-origin: bottom right;
+  pointer-events: none;
+  visibility: hidden;
+  transition: opacity 0.22s ease, transform 0.26s cubic-bezier(0.22, 0.61, 0.36, 1), visibility 0s linear 0.26s;
+}
+.nt-pop--open {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+  visibility: visible;
+  transition: opacity 0.22s ease, transform 0.26s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nt-rise, .nt-msg, .nt-bubble, .nt-pulse { animation: none; }
+  .nt-card:hover, .nt-btn:active, .nt-bubble:hover { transform: none; }
+  .nt-pop, .nt-pop--open { transition: opacity 0.12s ease; transform: none; }
+}

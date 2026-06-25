@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { HeroChatInput } from "@/components/HeroChatInput";
+import { OpenAssistantButton } from "@/components/OpenAssistantButton";
 
 const mono = "var(--font-jetbrains), monospace";
 const wrap: React.CSSProperties = { width: "min(1160px,100%)", margin: "0 auto" };
@@ -9,6 +10,7 @@ export default function Home() {
     <div>
       {/* HERO */}
       <section
+        className="nt-rise"
         style={{
           ...wrap,
           padding: "clamp(40px,6vw,68px) clamp(16px,4vw,40px) clamp(28px,4vw,40px)",
@@ -150,7 +152,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div style={{ border: "2px solid var(--bd)" }}>
+        <div className="nt-card" style={{ border: "2px solid var(--bd)" }}>
           <div style={{ background: "var(--navy)", color: "#fff", padding: "11px 16px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
             <span style={{ fontWeight: 800, fontSize: 14, textTransform: "uppercase", letterSpacing: ".03em" }}>Devis · exemple</span>
             <span style={{ fontFamily: mono, fontSize: 11, color: "var(--accent)" }}>#NT-4471</span>
@@ -181,14 +183,18 @@ export default function Home() {
           Deux outils, un seul moteur
         </div>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(280px,1fr))", gap: 20 }}>
-          <ToolCard href="/devis" glyph="=" title="Le simulateur" cta="Ouvrir le simulateur →">
-            Trajet, groupe, options. Le devis se recompose en direct, ligne par ligne, vous voyez
-            d&apos;où vient chaque euro.
-          </ToolCard>
-          <ToolCard href="/chat" glyph="~" title="Devis en 1 phrase" cta="Décrire mon besoin →">
-            Décrivez en une phrase. Il qualifie, complète, puis interroge le{" "}
-            <strong>même moteur déterministe</strong>, jamais d&apos;invention.
-          </ToolCard>
+          <Link href="/devis" className="nt-card" style={cardBox}>
+            <ToolInner glyph="=" title="Le simulateur" cta="Ouvrir le simulateur →">
+              Trajet, groupe, options. Le devis se recompose en direct, ligne par ligne, vous voyez
+              d&apos;où vient chaque euro.
+            </ToolInner>
+          </Link>
+          <OpenAssistantButton className="nt-card" style={{ ...cardBox, textAlign: "left", width: "100%" }}>
+            <ToolInner glyph="~" title="Devis en 1 phrase" cta="Décrire mon besoin →">
+              Décrivez en une phrase. Il qualifie, complète, puis interroge le{" "}
+              <strong>même moteur déterministe</strong>, jamais d&apos;invention.
+            </ToolInner>
+          </OpenAssistantButton>
         </div>
       </section>
 
@@ -241,16 +247,25 @@ export default function Home() {
   );
 }
 
-function ToolCard({ href, glyph, title, cta, children }: { href: string; glyph: string; title: string; cta: string; children: React.ReactNode }) {
+const cardBox: React.CSSProperties = {
+  border: "2px solid var(--bd)",
+  padding: 28,
+  background: "var(--surface)",
+  textDecoration: "none",
+  color: "var(--ink)",
+  display: "block",
+};
+
+function ToolInner({ glyph, title, cta, children }: { glyph: string; title: string; cta: string; children: React.ReactNode }) {
   return (
-    <Link href={href} style={{ border: "2px solid var(--bd)", padding: 28, background: "var(--surface)", textDecoration: "none", color: "var(--ink)", display: "block" }}>
+    <>
       <div style={{ display: "inline-flex", width: 44, height: 44, background: "var(--accent)", border: "2px solid var(--navy)", color: "var(--navy)", alignItems: "center", justifyContent: "center", fontWeight: 900, fontSize: 24, marginBottom: 16 }}>
         {glyph}
       </div>
       <div style={{ fontWeight: 800, fontSize: 22, textTransform: "uppercase", marginBottom: 10 }}>{title}</div>
       <p style={{ fontSize: 15, lineHeight: 1.55, color: "var(--muted)", fontWeight: 500, margin: "0 0 16px" }}>{children}</p>
       <span style={{ fontWeight: 800, textTransform: "uppercase", fontSize: 13, letterSpacing: ".02em" }}>{cta}</span>
-    </Link>
+    </>
   );
 }
 

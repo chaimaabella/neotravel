@@ -3,7 +3,7 @@ import { Archivo, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
-import { AssistantBubble } from "@/components/AssistantBubble";
+import { AssistantWidget } from "@/components/AssistantWidget";
 
 const archivo = Archivo({
   variable: "--font-archivo",
@@ -46,7 +46,7 @@ export default function RootLayout({
         <SiteHeader />
         <main className="flex flex-1 flex-col">{children}</main>
         <SiteFooter />
-        <AssistantBubble />
+        <AssistantWidget />
       </body>
     </html>
   );

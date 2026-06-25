@@ -3,11 +3,12 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { OpenAssistantButton } from "@/components/OpenAssistantButton";
 
 const NAV = [
   { href: "/", label: "Accueil" },
   { href: "/devis", label: "Simulateur" },
-  { href: "/chat", label: "Devis en 1 phrase" },
+  { href: "/chat", label: "À propos" },
 ];
 
 export function SiteHeader() {
@@ -120,8 +121,8 @@ export function SiteHeader() {
           >
             {dark ? "☀ Clair" : "☾ Sombre"}
           </button>
-          <Link
-            href="/chat"
+          <OpenAssistantButton
+            className="nt-btn"
             style={{
               background: "var(--accent)",
               color: "var(--navy)",
@@ -130,12 +131,11 @@ export function SiteHeader() {
               fontWeight: 800,
               textTransform: "uppercase",
               letterSpacing: ".02em",
-              textDecoration: "none",
               border: "2px solid var(--navy)",
             }}
           >
             Devis en 1 phrase →
-          </Link>
+          </OpenAssistantButton>
         </div>
       </div>
     </header>

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from "react";
 
 const mono = "var(--font-jetbrains), monospace";
 
@@ -21,13 +21,24 @@ const SUGGESTIONS = [
   "120 personnes, tour d'Italie sur 6 jours, 2 cars, départ Marseille",
 ];
 
-const prettyField = (f: string) =>
-  f.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
+const prettyField = (f: string) => f.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
 
 let counter = 100;
 const nid = () => ++counter;
 
-export function ChatBox() {
+export interface ChatPanelHandle {
+  send: (message: string) => void;
+}
+
+/**
+ * Panneau de conversation autonome (logique + UI). Remplit 100 % de son conteneur.
+ * Réutilisé par la page et par le popover ; expose send() via ref pour les messages
+ * pré-remplis (champ du hero, CTA…).
+ */
+export const ChatPanel = forwardRef<ChatPanelHandle, { onClose?: () => void }>(function ChatPanel(
+  { onClose },
+  ref,
+) {
   const [messages, setMessages] = useState<Msg[]>([
     {
       id: 1,
@@ -40,23 +51,16 @@ export function ChatBox() {
   const [typing, setTyping] = useState(false);
   const session = useRef<string>("");
   const scrollRef = useRef<HTMLDivElement>(null);
-  const autoSent = useRef(false);
+  const sendRef = useRef<(m: string) => void>(() => {});
 
   useEffect(() => {
     session.current =
       typeof crypto !== "undefined" && crypto.randomUUID ? crypto.randomUUID() : String(Date.now());
-
-    // Message pré-rempli (champ du hero / bulle) : on l'envoie automatiquement.
-    if (!autoSent.current) {
-      const q = new URLSearchParams(window.location.search).get("q");
-      if (q) {
-        autoSent.current = true;
-        window.history.replaceState(null, "", window.location.pathname);
-        send(q);
-      }
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // Expose send() au widget (messages pré-remplis), toujours avec le dernier état.
+  sendRef.current = send;
+  useImperativeHandle(ref, () => ({ send: (m: string) => sendRef.current(m) }), []);
 
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
@@ -90,76 +94,74 @@ export function ChatBox() {
   }
 
   return (
-    <div style={{ width: "min(780px,100%)", margin: "0 auto", padding: "clamp(20px,3vw,32px) clamp(16px,4vw,40px) 40px" }}>
-      <div style={{ border: "1.5px solid var(--line)", borderRadius: 22, display: "flex", flexDirection: "column", height: "min(74vh,680px)", background: "var(--bg)", overflow: "hidden" }}>
-        {/* header */}
-        <div style={{ padding: "14px 18px", display: "flex", alignItems: "center", gap: 11, background: "var(--navy)", color: "#fff" }}>
-          <div style={{ width: 38, height: 38, borderRadius: "50%", background: "var(--accent)", color: "var(--navy)", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 900, fontSize: 18 }}>N</div>
-          <div style={{ flex: 1 }}>
-            <div style={{ fontWeight: 800, fontSize: 15 }}>Assistant NeoTravel</div>
-            <div style={{ fontSize: 11.5, fontWeight: 600, color: "#a9b6cc", display: "flex", alignItems: "center", gap: 6, marginTop: 1 }}>
-              <span style={{ width: 7, height: 7, borderRadius: "50%", background: "#5dd08a" }} />En ligne · répond au moteur
-            </div>
+    <div style={{ display: "flex", flexDirection: "column", height: "100%", width: "100%", background: "var(--bg)", border: "1.5px solid var(--line)", borderRadius: 22, overflow: "hidden" }}>
+      {/* header */}
+      <div style={{ padding: "14px 18px", display: "flex", alignItems: "center", gap: 11, background: "var(--navy)", color: "#fff" }}>
+        <div style={{ width: 38, height: 38, borderRadius: "50%", background: "var(--accent)", color: "var(--navy)", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 900, fontSize: 18 }}>N</div>
+        <div style={{ flex: 1 }}>
+          <div style={{ fontWeight: 800, fontSize: 15 }}>Assistant NeoTravel</div>
+          <div style={{ fontSize: 11.5, fontWeight: 600, color: "#a9b6cc", display: "flex", alignItems: "center", gap: 6, marginTop: 1 }}>
+            <span className="nt-pulse" style={{ width: 7, height: 7, borderRadius: "50%", background: "#5dd08a" }} />En ligne · répond au moteur
           </div>
         </div>
-
-        {/* messages */}
-        <div ref={scrollRef} style={{ flex: 1, overflowY: "auto", padding: 18, display: "flex", flexDirection: "column", gap: 12, background: "var(--surface)" }}>
-          {messages.map((m) => (
-            <Bubble key={m.id} m={m} />
-          ))}
-          {typing && (
-            <div style={{ alignSelf: "flex-start", background: "var(--bg)", border: "1px solid var(--line)", padding: "13px 16px", display: "flex", gap: 5, alignItems: "center", borderRadius: "18px 18px 18px 5px" }}>
-              {[0, 0.15, 0.3].map((d) => (
-                <span key={d} style={{ width: 7, height: 7, borderRadius: "50%", background: "var(--muted)", animation: `nt-bounce 1s infinite ${d}s` }} />
-              ))}
-            </div>
-          )}
-        </div>
-
-        {/* suggestions + input */}
-        <div style={{ borderTop: "1px solid var(--line)", background: "var(--bg)" }}>
-          <div style={{ display: "flex", gap: 8, padding: "12px 14px 0", flexWrap: "wrap" }}>
-            {SUGGESTIONS.map((s) => (
-              <button key={s} onClick={() => send(s)} style={{ border: "1px solid var(--line)", borderRadius: 99, padding: "7px 13px", fontSize: 11.5, fontWeight: 600, cursor: "pointer", background: "var(--surface)", color: "var(--muted)", maxWidth: "100%", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
-                {s.length > 42 ? s.slice(0, 40) + "…" : s}
-              </button>
-            ))}
-          </div>
-          <div style={{ display: "flex", alignItems: "center", gap: 10, padding: "12px 14px" }}>
-            <input
-              type="text"
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") {
-                  e.preventDefault();
-                  send(input);
-                }
-              }}
-              placeholder="Décrivez votre besoin…"
-              aria-label="Votre message"
-              style={{ flex: 1, background: "var(--surface)", border: "1px solid var(--line)", borderRadius: 99, padding: "12px 16px", fontSize: 14, color: "var(--ink)" }}
-            />
-            <button onClick={() => send(input)} aria-label="Envoyer" style={{ width: 44, height: 44, borderRadius: "50%", background: "var(--navy)", color: "#fff", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 900, fontSize: 18, cursor: "pointer", border: "none", flexShrink: 0 }}>↑</button>
-          </div>
-        </div>
+        {onClose && (
+          <button onClick={onClose} aria-label="Fermer l'assistant" className="nt-btn" style={{ width: 30, height: 30, borderRadius: "50%", border: "none", background: "rgba(255,255,255,.12)", color: "#fff", fontSize: 18, cursor: "pointer", lineHeight: 1, flexShrink: 0 }}>
+            ✕
+          </button>
+        )}
       </div>
 
-      <p style={{ fontSize: 12, color: "var(--muted)", margin: "14px 4px 0", lineHeight: 1.5 }}>
-        L&apos;assistant extrait les informations de votre message et interroge le moteur déterministe.
-        Il ne calcule jamais le prix lui-même : <strong style={{ color: "var(--ink)" }}>même formule, même
-        résultat que le simulateur</strong>.
-      </p>
+      {/* messages */}
+      <div ref={scrollRef} style={{ flex: 1, overflowY: "auto", padding: 18, display: "flex", flexDirection: "column", gap: 12, background: "var(--surface)" }}>
+        {messages.map((m) => (
+          <div key={m.id} className="nt-msg">
+            <Bubble m={m} />
+          </div>
+        ))}
+        {typing && (
+          <div className="nt-msg" style={{ alignSelf: "flex-start", background: "var(--bg)", border: "1px solid var(--line)", padding: "13px 16px", display: "flex", gap: 5, alignItems: "center", borderRadius: "18px 18px 18px 5px" }}>
+            {[0, 0.15, 0.3].map((d) => (
+              <span key={d} style={{ width: 7, height: 7, borderRadius: "50%", background: "var(--muted)", animation: `nt-bounce 1s infinite ${d}s` }} />
+            ))}
+          </div>
+        )}
+      </div>
+
+      {/* suggestions + input */}
+      <div style={{ borderTop: "1px solid var(--line)", background: "var(--bg)" }}>
+        <div style={{ display: "flex", gap: 8, padding: "12px 14px 0", flexWrap: "wrap" }}>
+          {SUGGESTIONS.map((s) => (
+            <button key={s} onClick={() => send(s)} className="nt-btn" style={{ border: "1px solid var(--line)", borderRadius: 99, padding: "7px 13px", fontSize: 11.5, fontWeight: 600, cursor: "pointer", background: "var(--surface)", color: "var(--muted)", maxWidth: "100%", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+              {s.length > 42 ? s.slice(0, 40) + "…" : s}
+            </button>
+          ))}
+        </div>
+        <div style={{ display: "flex", alignItems: "center", gap: 10, padding: "12px 14px" }}>
+          <input
+            type="text"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                e.preventDefault();
+                send(input);
+              }
+            }}
+            placeholder="Décrivez votre besoin…"
+            aria-label="Votre message"
+            style={{ flex: 1, background: "var(--surface)", border: "1px solid var(--line)", borderRadius: 99, padding: "12px 16px", fontSize: 14, color: "var(--ink)" }}
+          />
+          <button onClick={() => send(input)} aria-label="Envoyer" className="nt-btn" style={{ width: 44, height: 44, borderRadius: "50%", background: "var(--navy)", color: "#fff", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 900, fontSize: 18, cursor: "pointer", border: "none", flexShrink: 0 }}>↑</button>
+        </div>
+      </div>
     </div>
   );
-}
+});
 
 function mapReply(data: unknown): Msg[] {
   const d = (data ?? {}) as Record<string, unknown>;
   const msg = typeof d.message === "string" ? d.message : "";
 
-  // Devis chiffré (statut complet)
   if (d.success === true && typeof d.prix_ttc === "number") {
     const ht = Number(d.prix_ht);
     const ttc = Number(d.prix_ttc);
@@ -170,23 +172,17 @@ function mapReply(data: unknown): Msg[] {
     ];
   }
 
-  // Cas complexe → escalade humaine
   if (d.statut === "cas_complexe") {
     return [
       { id: nid(), kind: "complex", text: msg || "Votre demande nécessite une étude personnalisée.", ref: `#NT-CX-${Math.floor(1000 + Math.random() * 9000)}` },
     ];
   }
 
-  // Incomplet → champs manquants
   if (d.success === false) {
     const champs = Array.isArray(d.champs_manquants) ? (d.champs_manquants as string[]) : [];
     const out: Msg[] = [{ id: nid(), kind: "botText", text: msg || "Il me manque quelques informations." }];
     if (champs.length) {
-      out.push({
-        id: nid(),
-        kind: "missing",
-        items: champs.map((c) => ({ label: prettyField(c), sub: "à préciser" })),
-      });
+      out.push({ id: nid(), kind: "missing", items: champs.map((c) => ({ label: prettyField(c), sub: "à préciser" })) });
     }
     return out;
   }
@@ -227,7 +223,7 @@ function Bubble({ m }: { m: Msg }) {
             <span style={{ fontWeight: 700, fontSize: 12.5, textTransform: "uppercase", letterSpacing: ".02em" }}>Total TTC</span>
             <span className="nt-num" style={{ fontWeight: 900, fontSize: 27, color: "var(--accent)", lineHeight: 0.82 }}>{m.ttc}</span>
           </div>
-          <Link href="/devis" style={{ display: "block", marginTop: 11, background: "var(--surface)", border: "1px solid var(--line)", color: "var(--ink)", textAlign: "center", padding: 11, borderRadius: 99, fontSize: 12.5, fontWeight: 700, textDecoration: "none" }}>
+          <Link href="/devis" className="nt-btn" style={{ display: "block", marginTop: 11, background: "var(--surface)", border: "1px solid var(--line)", color: "var(--ink)", textAlign: "center", padding: 11, borderRadius: 99, fontSize: 12.5, fontWeight: 700, textDecoration: "none" }}>
             Ouvrir dans le simulateur →
           </Link>
           <div style={{ fontFamily: mono, fontSize: 10, fontWeight: 500, color: "var(--muted)", marginTop: 10, textAlign: "center" }}>
@@ -259,7 +255,6 @@ function Bubble({ m }: { m: Msg }) {
     );
   }
 
-  // complex
   return (
     <div style={{ alignSelf: "stretch", background: "var(--bg)", border: "1px solid var(--line)", borderRadius: 18, overflow: "hidden" }}>
       <div style={{ padding: "13px 16px 11px", display: "flex", alignItems: "center", gap: 8, borderBottom: "1px solid var(--line)", fontWeight: 700, fontSize: 13.5 }}>

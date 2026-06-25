@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { openAssistant } from "@/lib/assistant-bus";
 
 const mono = "var(--font-jetbrains), monospace";
 
@@ -11,14 +11,13 @@ const EXEMPLES = [
   "Séminaire de 30 pers. en mai",
 ];
 
-/** Entrée conversationnelle en une phrase : envoie vers /chat?q=… (auto-envoyé). */
+/** Entrée conversationnelle en une phrase : ouvre l'assistant en popover (même page). */
 export function HeroChatInput() {
-  const router = useRouter();
   const [value, setValue] = useState("");
 
   function go(message?: string) {
-    const text = (message ?? value).trim();
-    router.push(text ? `/chat?q=${encodeURIComponent(text)}` : "/chat");
+    openAssistant((message ?? value).trim() || undefined);
+    setValue("");
   }
 
   return (
@@ -39,6 +38,7 @@ export function HeroChatInput() {
         />
         <button
           type="submit"
+          className="nt-btn"
           style={{ background: "var(--accent)", color: "var(--navy)", border: "none", borderLeft: "2px solid var(--bd)", padding: "0 22px", fontSize: 14, fontWeight: 800, textTransform: "uppercase", letterSpacing: ".02em", cursor: "pointer", whiteSpace: "nowrap" }}
         >
           Chiffrer →
@@ -50,6 +50,7 @@ export function HeroChatInput() {
           <button
             key={ex}
             onClick={() => go(ex)}
+            className="nt-btn"
             style={{ border: "1px solid var(--line)", background: "var(--surface)", color: "var(--muted)", padding: "6px 12px", fontFamily: mono, fontSize: 11, fontWeight: 600, cursor: "pointer" }}
           >
             {ex}
