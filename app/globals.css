@@ -25,6 +25,20 @@
   --r-sm: 6px;
   --r-md: 10px;
   --r-lg: 18px;
+  /* Échelle typographique */
+  --text-xs: 11px;
+  --text-sm: 12.5px;
+  --text-base: 14px;
+  --text-md: 15px;
+  --text-lg: 18px;
+  --text-xl: 22px;
+  /* Échelle d'espacement (multiples de 4) */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
 }
 
 html.dark {
@@ -90,6 +104,61 @@ textarea {
 }
 .nt-clip {
   overflow: hidden;
+}
+
+/* ===== Système de boutons (primaire / secondaire / ghost) ========= */
+.nt-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font: inherit;
+  font-weight: 800;
+  font-size: var(--text-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  padding: 11px 18px;
+  border: 2px solid transparent;
+  border-radius: var(--r-sm);
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: transform 0.14s ease, filter 0.14s ease, background 0.14s ease, color 0.14s ease;
+}
+.nt-button:hover {
+  filter: brightness(1.05);
+}
+.nt-button:active {
+  transform: translateY(1px);
+}
+.nt-button--primary {
+  background: var(--accent);
+  color: var(--navy);
+  border-color: var(--navy);
+}
+.nt-button--secondary {
+  background: var(--bg);
+  color: var(--ink);
+  border-color: var(--bd);
+}
+.nt-button--ghost {
+  background: transparent;
+  color: var(--ink);
+  border-color: transparent;
+  padding: 8px 10px;
+}
+.nt-button--ghost:hover {
+  filter: none;
+  color: var(--accent);
+}
+.nt-button--sm {
+  padding: 8px 14px;
+  font-size: var(--text-xs);
+}
+.nt-button--lg {
+  padding: 14px 24px;
+  font-size: var(--text-base);
 }
 
 input::placeholder,

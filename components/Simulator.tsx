@@ -343,9 +343,9 @@ export function Simulator() {
           )}
 
           <div className="nt-noprint" style={{ display: "flex", gap: 10, marginTop: 18, flexWrap: "wrap" }}>
-            <button className="nt-btn nt-r-sm" style={{ flex: 1, minWidth: 120, background: "var(--accent)", color: "var(--navy)", textAlign: "center", padding: 14, fontSize: 14, fontWeight: 800, textTransform: "uppercase", border: "2px solid var(--navy)", cursor: "pointer" }}>Valider →</button>
-            <button onClick={copyRef} className="nt-btn" style={ledgerBtn}>{copied ? "✓ Copié" : "Copier réf."}</button>
-            <button onClick={() => window.print()} className="nt-btn" style={ledgerBtn}>Imprimer</button>
+            <button className="nt-button nt-button--primary nt-button--lg" style={{ flex: 1, minWidth: 120 }}>Valider →</button>
+            <button onClick={copyRef} className="nt-button nt-button--secondary">{copied ? "✓ Copié" : "Copier réf."}</button>
+            <button onClick={() => window.print()} className="nt-button nt-button--secondary">Imprimer</button>
           </div>
         </div>
       </div>
@@ -366,12 +366,6 @@ function tripBtn(active: boolean): React.CSSProperties {
     background: active ? "var(--navy)" : "var(--field)", color: active ? "#fff" : "var(--ink)",
   };
 }
-
-const ledgerBtn: React.CSSProperties = {
-  background: "var(--bg)", color: "var(--ink)", textAlign: "center", padding: "14px 16px",
-  fontSize: 13, fontWeight: 800, textTransform: "uppercase", border: "2px solid var(--bd)", cursor: "pointer",
-  borderRadius: "var(--r-sm)",
-};
 
 function NumField({ label, value, min, max, onChange }: { label: string; value: number; min: number; max: number; onChange: (v: number) => void }) {
   return (

@@ -125,19 +125,7 @@ export function SiteHeader() {
           >
             {dark ? "☀ Clair" : "☾ Sombre"}
           </button>
-          <OpenAssistantButton
-            className="nt-btn nt-r-sm nt-cta-full"
-            style={{
-              background: "var(--accent)",
-              color: "var(--navy)",
-              padding: "9px 16px",
-              fontSize: 12.5,
-              fontWeight: 800,
-              textTransform: "uppercase",
-              letterSpacing: ".02em",
-              border: "2px solid var(--navy)",
-            }}
-          >
+          <OpenAssistantButton className="nt-button nt-button--primary nt-button--sm nt-cta-full">
             Devis en 1 phrase →
           </OpenAssistantButton>
         </div>

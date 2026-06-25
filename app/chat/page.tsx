@@ -102,10 +102,10 @@ export default function AProposPage() {
             <p style={{ fontSize: 15, color: "var(--muted)", margin: "6px 0 0", fontWeight: 500 }}>Obtenez un prix tout de suite, en une phrase ou via le simulateur.</p>
           </div>
           <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-            <OpenAssistantButton className="nt-btn nt-r-sm" style={{ background: "var(--accent)", color: "var(--navy)", padding: "14px 24px", fontSize: 14, fontWeight: 800, textTransform: "uppercase", letterSpacing: ".02em", border: "2px solid var(--navy)" }}>
+            <OpenAssistantButton className="nt-button nt-button--primary nt-button--lg">
               Devis en 1 phrase →
             </OpenAssistantButton>
-            <Link href="/devis" className="nt-btn nt-r-sm" style={{ background: "var(--bg)", color: "var(--ink)", padding: "14px 24px", fontSize: 14, fontWeight: 800, textTransform: "uppercase", letterSpacing: ".02em", border: "2px solid var(--bd)", textDecoration: "none" }}>
+            <Link href="/devis" className="nt-button nt-button--secondary nt-button--lg">
               Ouvrir le simulateur →
             </Link>
           </div>

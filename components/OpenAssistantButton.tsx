@@ -22,7 +22,7 @@ export function OpenAssistantButton({
       onClick={() => openAssistant(message)}
       aria-label={ariaLabel}
       className={className}
-      style={{ cursor: "pointer", border: "none", font: "inherit", ...style }}
+      style={{ cursor: "pointer", font: "inherit", ...style }}
     >
       {children}
     </button>

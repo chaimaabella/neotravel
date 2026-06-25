@@ -124,6 +124,18 @@ export const ChatPanel = forwardRef<ChatPanelHandle, { onClose?: () => void; onR
             <Bubble m={m} />
           </div>
         ))}
+        {messages.length <= 1 && !typing && (
+          <div style={{ margin: "auto", textAlign: "center", maxWidth: 280, padding: "8px 0" }}>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 14 }}>
+              <span style={{ width: 10, height: 10, borderRadius: "50%", background: "var(--ink)" }} />
+              <span style={{ width: 90, height: 2, margin: "0 8px", background: "repeating-linear-gradient(90deg,var(--muted),var(--muted) 6px,transparent 6px,transparent 11px)" }} />
+              <span style={{ width: 10, height: 10, borderRadius: "50%", background: "var(--accent)", border: "2px solid var(--bd)" }} />
+            </div>
+            <p style={{ fontSize: "var(--text-sm)", color: "var(--muted)", lineHeight: 1.5, margin: 0, fontWeight: 500 }}>
+              Décrivez votre trajet en une phrase, ou choisissez un exemple ci-dessous.
+            </p>
+          </div>
+        )}
         {typing && (
           <div className="nt-msg" style={{ alignSelf: "flex-start", background: "var(--bg)", border: "1px solid var(--line)", padding: "13px 16px", display: "flex", gap: 5, alignItems: "center", borderRadius: "18px 18px 18px 5px" }}>
             {[0, 0.15, 0.3].map((d) => (
