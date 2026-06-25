@@ -72,6 +72,20 @@ export async function POST(request) {
       data = { success: false, message: text || "Réponse inattendue de l'assistant." };
     }
 
+    // Webhook n8n pas encore activé (workflow inactif) → message clair plutôt que
+    // l'erreur technique brute de n8n.
+    if (res.status === 404 && (data?.code === 404 || /not registered/i.test(data?.message ?? ""))) {
+      return Response.json(
+        {
+          success: false,
+          message:
+            "L'assistant est en cours d'activation côté n8n. Réessayez dans un instant, ou utilisez le simulateur de devis.",
+          offline: true,
+        },
+        { status: 503 },
+      );
+    }
+
     // On relaie le statut HTTP de n8n (200 / 422 / autre) et son corps.
     return Response.json(data, { status: res.status });
   } catch (error) {

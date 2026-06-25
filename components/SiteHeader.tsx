@@ -63,13 +63,13 @@ export function SiteHeader() {
               alignItems: "center",
               justifyContent: "center",
               fontWeight: 900,
-              fontSize: 19,
+              fontSize: "var(--text-lg)",
               border: "2px solid var(--bd)",
             }}
           >
             N
           </div>
-          <span style={{ fontWeight: 800, fontSize: 21, letterSpacing: "-.01em" }}>NEOTRAVEL</span>
+          <span style={{ fontWeight: 800, fontSize: "var(--text-xl)", letterSpacing: "-.01em" }}>NEOTRAVEL</span>
         </Link>
 
         <nav
@@ -78,7 +78,7 @@ export function SiteHeader() {
             display: "flex",
             alignItems: "center",
             gap: "clamp(14px,2.4vw,26px)",
-            fontSize: 13,
+            fontSize: "var(--text-sm)",
             fontWeight: 700,
             textTransform: "uppercase",
             letterSpacing: ".02em",
@@ -118,7 +118,7 @@ export function SiteHeader() {
               background: "transparent",
               color: "var(--ink)",
               padding: "7px 11px",
-              fontSize: 11,
+              fontSize: "var(--text-2xs)",
               fontWeight: 700,
               textTransform: "uppercase",
             }}

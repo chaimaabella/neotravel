@@ -53,7 +53,7 @@ export function LandingChat() {
       </div>
       <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
         <DetectedInfo fields={fields} />
-        <p style={{ fontSize: 12, lineHeight: 1.5, color: "var(--muted)", margin: "2px 4px 0" }}>
+        <p style={{ fontSize: "var(--text-xs)", lineHeight: 1.5, color: "var(--muted)", margin: "2px 4px 0" }}>
           {touched
             ? "Ces informations sont extraites de votre message. Le devis n'est calculé qu'une fois le dossier complet."
             : "Décrivez votre besoin : l'assistant coche les informations au fil de la conversation."}

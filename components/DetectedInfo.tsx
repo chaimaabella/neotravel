@@ -20,8 +20,8 @@ export function DetectedInfo({ fields }: { fields: DetectedField[] }) {
   return (
     <div className="nt-r-md nt-clip" style={{ border: "2px solid var(--bd)", background: "var(--bg)" }}>
       <div style={{ background: "var(--navy)", color: "#fff", padding: "10px 15px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-        <span style={{ fontWeight: 800, fontSize: 13.5, textTransform: "uppercase", letterSpacing: ".03em" }}>Informations détectées</span>
-        <span style={{ fontFamily: mono, fontSize: 11, color: "var(--accent)" }}>
+        <span style={{ fontWeight: 800, fontSize: "var(--text-base)", textTransform: "uppercase", letterSpacing: ".03em" }}>Informations détectées</span>
+        <span style={{ fontFamily: mono, fontSize: "var(--text-2xs)", color: "var(--accent)" }}>
           {fields.filter((f) => f.status === "ok").length}/{fields.length}
         </span>
       </div>
@@ -30,8 +30,8 @@ export function DetectedInfo({ fields }: { fields: DetectedField[] }) {
           const m = MARK[f.status];
           return (
             <div key={f.label} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12, padding: "8px 0", borderBottom: "1px solid var(--line)" }}>
-              <span style={{ fontSize: 13.5, fontWeight: 600, color: f.status === "pending" ? "var(--muted)" : "var(--ink)" }}>{f.label}</span>
-              <span style={{ fontFamily: mono, fontSize: 14, fontWeight: 700, color: m.color }}>{m.sign}</span>
+              <span style={{ fontSize: "var(--text-base)", fontWeight: 600, color: f.status === "pending" ? "var(--muted)" : "var(--ink)" }}>{f.label}</span>
+              <span style={{ fontFamily: mono, fontSize: "var(--text-base)", fontWeight: 700, color: m.color }}>{m.sign}</span>
             </div>
           );
         })}

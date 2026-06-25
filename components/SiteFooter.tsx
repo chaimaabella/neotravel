@@ -14,11 +14,11 @@ export function SiteFooter() {
             flexWrap: "wrap",
           }}
         >
-          <span style={{ fontWeight: 800, fontSize: 22 }}>NEOTRAVEL</span>
+          <span style={{ fontWeight: 800, fontSize: "var(--text-xl)" }}>NEOTRAVEL</span>
           <span
             style={{
               fontFamily: "var(--font-jetbrains), monospace",
-              fontSize: 12,
+              fontSize: "var(--text-xs)",
               color: "#9fb0cc",
             }}
           >

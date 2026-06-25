@@ -100,18 +100,18 @@ export const ChatPanel = forwardRef<ChatPanelHandle, { onClose?: () => void; onR
     <div style={{ display: "flex", flexDirection: "column", height: "100%", width: "100%", background: "var(--bg)", border: "1.5px solid var(--line)", borderRadius: 22, overflow: "hidden" }}>
       {/* header */}
       <div style={{ padding: "14px 18px", display: "flex", alignItems: "center", gap: 11, background: "var(--navy)", color: "#fff" }}>
-        <div style={{ width: 38, height: 38, borderRadius: "50%", background: "var(--accent)", color: "var(--navy)", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 900, fontSize: 18 }}>N</div>
+        <div style={{ width: 38, height: 38, borderRadius: "50%", background: "var(--accent)", color: "var(--navy)", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 900, fontSize: "var(--text-lg)" }}>N</div>
         <div style={{ flex: 1 }}>
-          <div style={{ fontWeight: 800, fontSize: 15 }}>Assistant NeoTravel</div>
-          <div style={{ fontSize: 11.5, fontWeight: 600, color: "#a9b6cc", display: "flex", alignItems: "center", gap: 6, marginTop: 1 }}>
+          <div style={{ fontWeight: 800, fontSize: "var(--text-md)" }}>Assistant NeoTravel</div>
+          <div style={{ fontSize: "var(--text-xs)", fontWeight: 600, color: "#a9b6cc", display: "flex", alignItems: "center", gap: 6, marginTop: 1 }}>
             <span className="nt-pulse" style={{ width: 7, height: 7, borderRadius: "50%", background: "#5dd08a" }} />En ligne · répond au moteur
           </div>
         </div>
-        <button onClick={reset} aria-label="Réinitialiser la conversation" title="Nouvelle conversation" className="nt-btn" style={{ width: 30, height: 30, borderRadius: "50%", border: "none", background: "rgba(255,255,255,.12)", color: "#fff", fontSize: 20, cursor: "pointer", lineHeight: 1, flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <button onClick={reset} aria-label="Réinitialiser la conversation" title="Nouvelle conversation" className="nt-btn" style={{ width: 30, height: 30, borderRadius: "50%", border: "none", background: "rgba(255,255,255,.12)", color: "#fff", fontSize: "var(--text-xl)", cursor: "pointer", lineHeight: 1, flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
           ↻
         </button>
         {onClose && (
-          <button onClick={onClose} aria-label="Fermer l'assistant" className="nt-btn" style={{ width: 30, height: 30, borderRadius: "50%", border: "none", background: "rgba(255,255,255,.12)", color: "#fff", fontSize: 16, cursor: "pointer", lineHeight: 1, flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
+          <button onClick={onClose} aria-label="Fermer l'assistant" className="nt-btn" style={{ width: 30, height: 30, borderRadius: "50%", border: "none", background: "rgba(255,255,255,.12)", color: "#fff", fontSize: "var(--text-md)", cursor: "pointer", lineHeight: 1, flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
             ✕
           </button>
         )}
@@ -149,7 +149,7 @@ export const ChatPanel = forwardRef<ChatPanelHandle, { onClose?: () => void; onR
       <div style={{ borderTop: "1px solid var(--line)", background: "var(--bg)" }}>
         <div style={{ display: "flex", gap: 8, padding: "12px 14px 0", flexWrap: "wrap" }}>
           {SUGGESTIONS.map((s) => (
-            <button key={s} onClick={() => send(s)} className="nt-btn" style={{ border: "1px solid var(--line)", borderRadius: 99, padding: "7px 13px", fontSize: 11.5, fontWeight: 600, cursor: "pointer", background: "var(--surface)", color: "var(--muted)", maxWidth: "100%", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+            <button key={s} onClick={() => send(s)} className="nt-btn" style={{ border: "1px solid var(--line)", borderRadius: 99, padding: "7px 13px", fontSize: "var(--text-xs)", fontWeight: 600, cursor: "pointer", background: "var(--surface)", color: "var(--muted)", maxWidth: "100%", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
               {s.length > 42 ? s.slice(0, 40) + "…" : s}
             </button>
           ))}
@@ -167,9 +167,9 @@ export const ChatPanel = forwardRef<ChatPanelHandle, { onClose?: () => void; onR
             }}
             placeholder="Décrivez votre besoin…"
             aria-label="Votre message"
-            style={{ flex: 1, background: "var(--surface)", border: "1px solid var(--line)", borderRadius: 99, padding: "12px 16px", fontSize: 14, color: "var(--ink)" }}
+            style={{ flex: 1, background: "var(--surface)", border: "1px solid var(--line)", borderRadius: 99, padding: "12px 16px", fontSize: "var(--text-base)", color: "var(--ink)" }}
           />
-          <button onClick={() => send(input)} aria-label="Envoyer" className="nt-btn" style={{ width: 44, height: 44, borderRadius: "50%", background: "var(--navy)", color: "#fff", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 900, fontSize: 18, cursor: "pointer", border: "none", flexShrink: 0 }}>↑</button>
+          <button onClick={() => send(input)} aria-label="Envoyer" className="nt-btn" style={{ width: 44, height: 44, borderRadius: "50%", background: "var(--navy)", color: "#fff", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 900, fontSize: "var(--text-lg)", cursor: "pointer", border: "none", flexShrink: 0 }}>↑</button>
         </div>
       </div>
     </div>
@@ -211,7 +211,7 @@ function mapReply(data: unknown): Msg[] {
 function Bubble({ m }: { m: Msg }) {
   if (m.kind === "user") {
     return (
-      <div style={{ alignSelf: "flex-end", maxWidth: "82%", background: "var(--navy)", color: "#fff", padding: "11px 15px", fontSize: 14, lineHeight: 1.45, borderRadius: "18px 18px 5px 18px" }}>
+      <div style={{ alignSelf: "flex-end", maxWidth: "82%", background: "var(--navy)", color: "#fff", padding: "11px 15px", fontSize: "var(--text-base)", lineHeight: 1.45, borderRadius: "18px 18px 5px 18px" }}>
         {m.text}
       </div>
     );
@@ -219,7 +219,7 @@ function Bubble({ m }: { m: Msg }) {
 
   if (m.kind === "botText") {
     return (
-      <div style={{ alignSelf: "flex-start", maxWidth: "88%", background: "var(--bg)", border: "1px solid var(--line)", padding: "11px 15px", fontSize: 14, lineHeight: 1.45, borderRadius: "18px 18px 18px 5px" }}>
+      <div style={{ alignSelf: "flex-start", maxWidth: "88%", background: "var(--bg)", border: "1px solid var(--line)", padding: "11px 15px", fontSize: "var(--text-base)", lineHeight: 1.45, borderRadius: "18px 18px 18px 5px" }}>
         {m.text}
       </div>
     );
@@ -229,22 +229,22 @@ function Bubble({ m }: { m: Msg }) {
     return (
       <div style={{ alignSelf: "stretch", background: "var(--bg)", border: "1px solid var(--line)", borderRadius: 18, overflow: "hidden" }}>
         <div style={{ padding: "13px 16px 11px", display: "flex", justifyContent: "space-between", alignItems: "center", borderBottom: "1px solid var(--line)" }}>
-          <span style={{ display: "flex", alignItems: "center", gap: 8, fontWeight: 700, fontSize: 13.5 }}>
+          <span style={{ display: "flex", alignItems: "center", gap: 8, fontWeight: 700, fontSize: "var(--text-base)" }}>
             <span style={{ width: 9, height: 9, borderRadius: "50%", background: "var(--ok)" }} />Devis chiffré
           </span>
-          <span style={{ fontFamily: mono, fontSize: 10.5, color: "var(--muted)" }}>{m.ref}</span>
+          <span style={{ fontFamily: mono, fontSize: "var(--text-2xs)", color: "var(--muted)" }}>{m.ref}</span>
         </div>
         <div style={{ padding: "14px 16px 16px" }}>
           <Row label="Sous-total HT" value={m.ht} />
           <Row label="TVA 10 %" value={m.tva} pb={11} />
           <div style={{ background: "var(--navy)", color: "#fff", borderRadius: 12, padding: "13px 15px", display: "flex", justifyContent: "space-between", alignItems: "flex-end" }}>
-            <span style={{ fontWeight: 700, fontSize: 12.5, textTransform: "uppercase", letterSpacing: ".02em" }}>Total TTC</span>
-            <span className="nt-num" style={{ fontWeight: 900, fontSize: 27, color: "var(--accent)", lineHeight: 0.82 }}>{m.ttc}</span>
+            <span style={{ fontWeight: 700, fontSize: "var(--text-sm)", textTransform: "uppercase", letterSpacing: ".02em" }}>Total TTC</span>
+            <span className="nt-num" style={{ fontWeight: 900, fontSize: "var(--text-2xl)", color: "var(--accent)", lineHeight: 0.82 }}>{m.ttc}</span>
           </div>
-          <Link href="/devis" className="nt-btn" style={{ display: "block", marginTop: 11, background: "var(--surface)", border: "1px solid var(--line)", color: "var(--ink)", textAlign: "center", padding: 11, borderRadius: 99, fontSize: 12.5, fontWeight: 700, textDecoration: "none" }}>
+          <Link href="/devis" className="nt-btn" style={{ display: "block", marginTop: 11, background: "var(--surface)", border: "1px solid var(--line)", color: "var(--ink)", textAlign: "center", padding: 11, borderRadius: 99, fontSize: "var(--text-sm)", fontWeight: 700, textDecoration: "none" }}>
             Ouvrir dans le simulateur →
           </Link>
-          <div style={{ fontFamily: mono, fontSize: 10, fontWeight: 500, color: "var(--muted)", marginTop: 10, textAlign: "center" }}>
+          <div style={{ fontFamily: mono, fontSize: "var(--text-2xs)", fontWeight: 500, color: "var(--muted)", marginTop: 10, textAlign: "center" }}>
             calculé par le moteur, identique au simulateur
           </div>
         </div>
@@ -255,7 +255,7 @@ function Bubble({ m }: { m: Msg }) {
   if (m.kind === "missing") {
     return (
       <div style={{ alignSelf: "stretch", background: "var(--bg)", border: "1px solid var(--line)", borderRadius: 18, overflow: "hidden" }}>
-        <div style={{ padding: "13px 16px 11px", display: "flex", alignItems: "center", gap: 8, borderBottom: "1px solid var(--line)", fontWeight: 700, fontSize: 13.5 }}>
+        <div style={{ padding: "13px 16px 11px", display: "flex", alignItems: "center", gap: 8, borderBottom: "1px solid var(--line)", fontWeight: 700, fontSize: "var(--text-base)" }}>
           <span style={{ width: 9, height: 9, borderRadius: "50%", background: "var(--warn)" }} />Informations à compléter
         </div>
         <div style={{ padding: "14px 16px", display: "flex", flexDirection: "column", gap: 12 }}>
@@ -263,8 +263,8 @@ function Bubble({ m }: { m: Msg }) {
             <div key={i} style={{ display: "flex", alignItems: "center", gap: 12 }}>
               <span style={{ width: 20, height: 20, borderRadius: 6, border: "1.5px solid var(--muted)", flexShrink: 0 }} />
               <div>
-                <div style={{ fontSize: 13.5, fontWeight: 600 }}>{it.label}</div>
-                <div style={{ fontSize: 11, fontFamily: mono, color: "var(--muted)" }}>{it.sub}</div>
+                <div style={{ fontSize: "var(--text-base)", fontWeight: 600 }}>{it.label}</div>
+                <div style={{ fontSize: "var(--text-2xs)", fontFamily: mono, color: "var(--muted)" }}>{it.sub}</div>
               </div>
             </div>
           ))}
@@ -275,15 +275,15 @@ function Bubble({ m }: { m: Msg }) {
 
   return (
     <div style={{ alignSelf: "stretch", background: "var(--bg)", border: "1px solid var(--line)", borderRadius: 18, overflow: "hidden" }}>
-      <div style={{ padding: "13px 16px 11px", display: "flex", alignItems: "center", gap: 8, borderBottom: "1px solid var(--line)", fontWeight: 700, fontSize: 13.5 }}>
+      <div style={{ padding: "13px 16px 11px", display: "flex", alignItems: "center", gap: 8, borderBottom: "1px solid var(--line)", fontWeight: 700, fontSize: "var(--text-base)" }}>
         <span style={{ width: 9, height: 9, borderRadius: "50%", background: "var(--danger)" }} />Transmis à un conseiller
       </div>
       <div style={{ padding: "14px 16px" }}>
-        <p style={{ fontSize: 13, lineHeight: 1.5, fontWeight: 500, margin: "0 0 12px", color: "var(--muted)" }}>{m.text}</p>
-        <div style={{ display: "flex", justifyContent: "space-between", fontFamily: mono, fontSize: 11.5, fontWeight: 600, padding: "6px 0", borderTop: "1px solid var(--line)", color: "var(--muted)" }}>
+        <p style={{ fontSize: "var(--text-sm)", lineHeight: 1.5, fontWeight: 500, margin: "0 0 12px", color: "var(--muted)" }}>{m.text}</p>
+        <div style={{ display: "flex", justifyContent: "space-between", fontFamily: mono, fontSize: "var(--text-xs)", fontWeight: 600, padding: "6px 0", borderTop: "1px solid var(--line)", color: "var(--muted)" }}>
           <span>Réponse sous</span><span style={{ color: "var(--ink)", fontWeight: 700 }}>24 h ouvrées</span>
         </div>
-        <div style={{ display: "flex", justifyContent: "space-between", fontFamily: mono, fontSize: 11.5, fontWeight: 600, padding: "6px 0", color: "var(--muted)" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", fontFamily: mono, fontSize: "var(--text-xs)", fontWeight: 600, padding: "6px 0", color: "var(--muted)" }}>
           <span>Dossier</span><span style={{ color: "var(--ink)", fontWeight: 700 }}>{m.ref}</span>
         </div>
       </div>
@@ -293,7 +293,7 @@ function Bubble({ m }: { m: Msg }) {
 
 function Row({ label, value, pb = 3 }: { label: string; value: string; pb?: number }) {
   return (
-    <div style={{ display: "flex", justifyContent: "space-between", fontFamily: mono, fontSize: 12, fontWeight: 600, padding: `3px 0 ${pb}px`, color: "var(--muted)" }}>
+    <div style={{ display: "flex", justifyContent: "space-between", fontFamily: mono, fontSize: "var(--text-xs)", fontWeight: 600, padding: `3px 0 ${pb}px`, color: "var(--muted)" }}>
       <span>{label}</span>
       <span style={{ color: "var(--ink)" }}>{value}</span>
     </div>

@@ -26,7 +26,7 @@ export default function Home() {
             background: "var(--accent)",
             color: "var(--navy)",
             padding: "8px 13px",
-            fontSize: 12,
+            fontSize: "var(--text-xs)",
             fontWeight: 800,
             textTransform: "uppercase",
             letterSpacing: ".03em",
@@ -78,7 +78,7 @@ export default function Home() {
 
         <LandingChat />
 
-        <p style={{ fontSize: 13, color: "var(--muted)", marginTop: 16 }}>
+        <p style={{ fontSize: "var(--text-sm)", color: "var(--muted)", marginTop: 16 }}>
           Vous préférez les détails ?{" "}
           <Link
             href="/devis"
@@ -106,8 +106,8 @@ export default function Home() {
                   borderLeft: i > 0 ? "1px solid rgba(255,255,255,.14)" : undefined,
                 }}
               >
-                <div style={{ fontWeight: 900, fontSize: 32, color: "var(--accent)" }}>{big}</div>
-                <div style={{ fontSize: 12.5, color: "#9fb0cc", marginTop: 6, textTransform: "uppercase", letterSpacing: ".03em", fontWeight: 600 }}>{small}</div>
+                <div style={{ fontWeight: 900, fontSize: "var(--text-3xl)", color: "var(--accent)" }}>{big}</div>
+                <div style={{ fontSize: "var(--text-sm)", color: "#9fb0cc", marginTop: 6, textTransform: "uppercase", letterSpacing: ".03em", fontWeight: 600 }}>{small}</div>
               </div>
             ))}
           </div>
@@ -120,23 +120,23 @@ export default function Home() {
           <div style={{ fontWeight: 800, fontSize: "clamp(28px,4vw,42px)", lineHeight: 1, textTransform: "uppercase", letterSpacing: "-.02em", marginBottom: 16 }}>
             D&apos;où vient chaque euro.
           </div>
-          <p style={{ fontSize: 16, lineHeight: 1.55, color: "var(--muted)", fontWeight: 500, margin: "0 0 22px" }}>
+          <p style={{ fontSize: "var(--text-md)", lineHeight: 1.55, color: "var(--muted)", fontWeight: 500, margin: "0 0 22px" }}>
             On ne sort pas un chiffre magique. On affiche le calcul, ligne par ligne : base, marge,
             saison, urgence, capacité, options. Puis TVA et TTC.
           </p>
           <div style={{ display: "flex", gap: 9, flexWrap: "wrap" }}>
-            <span className="nt-r-sm" style={{ background: "var(--navy)", color: "#fff", padding: "6px 12px", fontFamily: mono, fontSize: 11, fontWeight: 700 }}>CASCADE</span>
-            <span className="nt-r-sm" style={{ background: "var(--accent)", color: "var(--navy)", padding: "6px 12px", fontFamily: mono, fontSize: 11, fontWeight: 700 }}>RÉF. VÉRIFIABLE</span>
-            <span className="nt-r-sm" style={{ border: "2px solid var(--bd)", padding: "5px 11px", fontFamily: mono, fontSize: 11, fontWeight: 700 }}>AUDITABLE</span>
+            <span className="nt-r-sm" style={{ background: "var(--navy)", color: "#fff", padding: "6px 12px", fontFamily: mono, fontSize: "var(--text-2xs)", fontWeight: 700 }}>CASCADE</span>
+            <span className="nt-r-sm" style={{ background: "var(--accent)", color: "var(--navy)", padding: "6px 12px", fontFamily: mono, fontSize: "var(--text-2xs)", fontWeight: 700 }}>RÉF. VÉRIFIABLE</span>
+            <span className="nt-r-sm" style={{ border: "2px solid var(--bd)", padding: "5px 11px", fontFamily: mono, fontSize: "var(--text-2xs)", fontWeight: 700 }}>AUDITABLE</span>
           </div>
         </div>
 
         <div className="nt-card nt-r-md nt-clip" style={{ border: "2px solid var(--bd)" }}>
           <div style={{ background: "var(--navy)", color: "#fff", padding: "11px 16px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-            <span style={{ fontWeight: 800, fontSize: 14, textTransform: "uppercase", letterSpacing: ".03em" }}>Devis · exemple</span>
-            <span style={{ fontFamily: mono, fontSize: 11, color: "var(--accent)" }}>#NT-4471</span>
+            <span style={{ fontWeight: 800, fontSize: "var(--text-base)", textTransform: "uppercase", letterSpacing: ".03em" }}>Devis · exemple</span>
+            <span style={{ fontFamily: mono, fontSize: "var(--text-2xs)", color: "var(--accent)" }}>#NT-4471</span>
           </div>
-          <div style={{ padding: 18, fontFamily: mono, fontSize: 13, fontWeight: 500, background: "var(--bg)" }}>
+          <div style={{ padding: 18, fontFamily: mono, fontSize: "var(--text-sm)", fontWeight: 500, background: "var(--bg)" }}>
             {[
               ["Base · 100 km", "580,00 €", false],
               ["Aller-retour ×2", "+ 580,00 €", true],
@@ -150,8 +150,8 @@ export default function Home() {
             ))}
           </div>
           <div style={{ background: "var(--navy)", color: "#fff", padding: "15px 18px", display: "flex", justifyContent: "space-between", alignItems: "flex-end" }}>
-            <span style={{ fontWeight: 700, fontSize: 14, textTransform: "uppercase", letterSpacing: ".03em" }}>Total TTC</span>
-            <span className="nt-num" style={{ fontWeight: 900, fontSize: 34, color: "var(--accent)", lineHeight: 0.85 }}>1 466,30 €</span>
+            <span style={{ fontWeight: 700, fontSize: "var(--text-base)", textTransform: "uppercase", letterSpacing: ".03em" }}>Total TTC</span>
+            <span className="nt-num" style={{ fontWeight: 900, fontSize: "var(--text-3xl)", color: "var(--accent)", lineHeight: 0.85 }}>1 466,30 €</span>
           </div>
         </div>
       </section>
@@ -190,9 +190,9 @@ export default function Home() {
               ["03", "Auditable", "Référence sur chaque devis. Relancez le calcul un mois après : même résultat au centime."],
             ].map(([n, t, p]) => (
               <div key={n}>
-                <div style={{ fontWeight: 900, fontSize: 46, color: "var(--accent)", lineHeight: 0.85, marginBottom: 12 }}>{n}</div>
-                <div style={{ fontWeight: 800, fontSize: 19, textTransform: "uppercase", marginBottom: 9 }}>{t}</div>
-                <p style={{ fontSize: 14, lineHeight: 1.55, color: "#9fb0cc", margin: 0 }}>{p}</p>
+                <div style={{ fontWeight: 900, fontSize: "var(--text-4xl)", color: "var(--accent)", lineHeight: 0.85, marginBottom: 12 }}>{n}</div>
+                <div style={{ fontWeight: 800, fontSize: "var(--text-lg)", textTransform: "uppercase", marginBottom: 9 }}>{t}</div>
+                <p style={{ fontSize: "var(--text-base)", lineHeight: 1.55, color: "#9fb0cc", margin: 0 }}>{p}</p>
               </div>
             ))}
           </div>
@@ -238,12 +238,12 @@ const cardBox: React.CSSProperties = {
 function ToolInner({ glyph, title, cta, children }: { glyph: string; title: string; cta: string; children: React.ReactNode }) {
   return (
     <>
-      <div className="nt-r-sm" style={{ display: "inline-flex", width: 44, height: 44, background: "var(--accent)", border: "2px solid var(--navy)", color: "var(--navy)", alignItems: "center", justifyContent: "center", fontWeight: 900, fontSize: 24, marginBottom: 16 }}>
+      <div className="nt-r-sm" style={{ display: "inline-flex", width: 44, height: 44, background: "var(--accent)", border: "2px solid var(--navy)", color: "var(--navy)", alignItems: "center", justifyContent: "center", fontWeight: 900, fontSize: "var(--text-2xl)", marginBottom: 16 }}>
         {glyph}
       </div>
-      <div style={{ fontWeight: 800, fontSize: 22, textTransform: "uppercase", marginBottom: 10 }}>{title}</div>
-      <p style={{ fontSize: 15, lineHeight: 1.55, color: "var(--muted)", fontWeight: 500, margin: "0 0 16px" }}>{children}</p>
-      <span style={{ fontWeight: 800, textTransform: "uppercase", fontSize: 13, letterSpacing: ".02em" }}>{cta}</span>
+      <div style={{ fontWeight: 800, fontSize: "var(--text-xl)", textTransform: "uppercase", marginBottom: 10 }}>{title}</div>
+      <p style={{ fontSize: "var(--text-md)", lineHeight: 1.55, color: "var(--muted)", fontWeight: 500, margin: "0 0 16px" }}>{children}</p>
+      <span style={{ fontWeight: 800, textTransform: "uppercase", fontSize: "var(--text-sm)", letterSpacing: ".02em" }}>{cta}</span>
     </>
   );
 }
@@ -251,8 +251,8 @@ function ToolInner({ glyph, title, cta, children }: { glyph: string; title: stri
 function CoeffCell({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div style={{ padding: 22, borderBottom: "2px solid var(--line)" }}>
-      <div style={{ fontFamily: mono, fontSize: 12, fontWeight: 700, marginBottom: 12, paddingBottom: 8, borderBottom: "2px solid var(--accent)" }}>{title}</div>
-      <div style={{ fontFamily: mono, fontSize: 13, lineHeight: 1.9, color: "var(--muted)" }}>{children}</div>
+      <div style={{ fontFamily: mono, fontSize: "var(--text-xs)", fontWeight: 700, marginBottom: 12, paddingBottom: 8, borderBottom: "2px solid var(--accent)" }}>{title}</div>
+      <div style={{ fontFamily: mono, fontSize: "var(--text-sm)", lineHeight: 1.9, color: "var(--muted)" }}>{children}</div>
     </div>
   );
 }

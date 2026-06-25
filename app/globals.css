@@ -25,13 +25,17 @@
   --r-sm: 6px;
   --r-md: 10px;
   --r-lg: 18px;
-  /* Échelle typographique */
-  --text-xs: 11px;
-  --text-sm: 12.5px;
+  /* Échelle typographique (consolidée — snap des valeurs ad-hoc) */
+  --text-2xs: 11px;
+  --text-xs: 12px;
+  --text-sm: 13px;
   --text-base: 14px;
-  --text-md: 15px;
+  --text-md: 16px;
   --text-lg: 18px;
   --text-xl: 22px;
+  --text-2xl: 26px;
+  --text-3xl: 32px;
+  --text-4xl: 46px;
   /* Échelle d'espacement (multiples de 4) */
   --space-1: 4px;
   --space-2: 8px;
