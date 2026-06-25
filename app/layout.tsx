@@ -3,6 +3,7 @@ import { Archivo, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
+import { AssistantBubble } from "@/components/AssistantBubble";
 
 const archivo = Archivo({
   variable: "--font-archivo",
@@ -17,9 +18,9 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "NeoTravel — Le prix de votre car, calculé devant vous",
+  title: "NeoTravel · Le prix de votre car, calculé devant vous",
   description:
-    "Transport de groupe en autocar. Prix 100 % déterministe, transparent et auditable. Simulateur de devis et assistant — de 1 à 85 passagers.",
+    "Transport de groupe en autocar. Prix 100 % déterministe, transparent et auditable. Simulateur de devis et assistant, de 1 à 85 passagers.",
 };
 
 // Évite le flash de thème : applique la préférence avant le premier paint.
@@ -45,6 +46,7 @@ export default function RootLayout({
         <SiteHeader />
         <main className="flex flex-1 flex-col">{children}</main>
         <SiteFooter />
+        <AssistantBubble />
       </body>
     </html>
   );

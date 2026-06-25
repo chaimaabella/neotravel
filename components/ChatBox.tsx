@@ -33,17 +33,29 @@ export function ChatBox() {
       id: 1,
       kind: "botText",
       text:
-        "Bonjour ! Décrivez votre besoin — groupe, trajet, dates — et je vous chiffre un devis, ou je vous dis ce qu'il me manque.",
+        "Bonjour ! Décrivez votre besoin (groupe, trajet, dates) et je vous chiffre un devis, ou je vous dis ce qu'il me manque.",
     },
   ]);
   const [input, setInput] = useState("");
   const [typing, setTyping] = useState(false);
   const session = useRef<string>("");
   const scrollRef = useRef<HTMLDivElement>(null);
+  const autoSent = useRef(false);
 
   useEffect(() => {
     session.current =
       typeof crypto !== "undefined" && crypto.randomUUID ? crypto.randomUUID() : String(Date.now());
+
+    // Message pré-rempli (champ du hero / bulle) : on l'envoie automatiquement.
+    if (!autoSent.current) {
+      const q = new URLSearchParams(window.location.search).get("q");
+      if (q) {
+        autoSent.current = true;
+        window.history.replaceState(null, "", window.location.pathname);
+        send(q);
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -136,7 +148,7 @@ export function ChatBox() {
 
       <p style={{ fontSize: 12, color: "var(--muted)", margin: "14px 4px 0", lineHeight: 1.5 }}>
         L&apos;assistant extrait les informations de votre message et interroge le moteur déterministe.
-        Il ne calcule jamais le prix lui-même — <strong style={{ color: "var(--ink)" }}>même formule, même
+        Il ne calcule jamais le prix lui-même : <strong style={{ color: "var(--ink)" }}>même formule, même
         résultat que le simulateur</strong>.
       </p>
     </div>
@@ -219,7 +231,7 @@ function Bubble({ m }: { m: Msg }) {
             Ouvrir dans le simulateur →
           </Link>
           <div style={{ fontFamily: mono, fontSize: 10, fontWeight: 500, color: "var(--muted)", marginTop: 10, textAlign: "center" }}>
-            calculé par le moteur — identique au simulateur
+            calculé par le moteur, identique au simulateur
           </div>
         </div>
       </div>

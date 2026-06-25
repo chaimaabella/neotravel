@@ -244,7 +244,7 @@ export function Simulator() {
           <div style={{ background: "var(--accent)", border: "2px solid var(--navy)", padding: "13px 15px", marginBottom: 26, display: "flex", alignItems: "center", gap: 13 }}>
             <div style={{ width: 38, height: 38, background: "var(--navy)", color: "var(--accent)", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 900, fontSize: 22, flexShrink: 0 }}>!</div>
             <div style={{ color: "var(--navy)" }}>
-              <div style={{ fontWeight: 800, fontSize: 14, textTransform: "uppercase" }}>Urgence — {urg.label}</div>
+              <div style={{ fontWeight: 800, fontSize: 14, textTransform: "uppercase" }}>Urgence · {urg.label}</div>
               <div style={{ fontSize: 12.5, fontWeight: 500 }}>Déduite automatiquement : {urg.note}</div>
             </div>
           </div>

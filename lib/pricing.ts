@@ -1,5 +1,5 @@
 /**
- * pricing.ts — Moteur de tarification côté client (recalcul live du simulateur).
+ * pricing.ts · Moteur de tarification côté client (recalcul live du simulateur).
  *
  * ⚠️ MIROIR de lib/calculer_devis.js (le moteur canonical, exposé via /api/devis
  * et appelé par l'agent n8n). Les valeurs DOIVENT rester identiques : même grille,

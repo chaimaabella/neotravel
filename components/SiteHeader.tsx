@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 const NAV = [
   { href: "/", label: "Accueil" },
   { href: "/devis", label: "Simulateur" },
-  { href: "/chat", label: "Assistant" },
+  { href: "/chat", label: "Devis en 1 phrase" },
 ];
 
 export function SiteHeader() {
@@ -121,19 +121,20 @@ export function SiteHeader() {
             {dark ? "☀ Clair" : "☾ Sombre"}
           </button>
           <Link
-            href="/devis"
+            href="/chat"
             style={{
-              background: "var(--navy)",
-              color: "#fff",
+              background: "var(--accent)",
+              color: "var(--navy)",
               padding: "9px 16px",
               fontSize: 12.5,
-              fontWeight: 700,
+              fontWeight: 800,
               textTransform: "uppercase",
               letterSpacing: ".02em",
               textDecoration: "none",
+              border: "2px solid var(--navy)",
             }}
           >
-            Obtenir un prix →
+            Devis en 1 phrase →
           </Link>
         </div>
       </div>

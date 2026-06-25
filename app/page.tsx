@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { HeroChatInput } from "@/components/HeroChatInput";
 
 const mono = "var(--font-jetbrains), monospace";
 const wrap: React.CSSProperties = { width: "min(1160px,100%)", margin: "0 auto" };
@@ -84,7 +85,7 @@ export default function Home() {
             fontWeight: 500,
           }}
         >
-          Aucune IA ne fixe votre tarif. Une formule unique, transparente et auditable — mêmes
+          Aucune IA ne fixe votre tarif. Une formule unique, transparente et auditable. Mêmes
           informations, même prix, pour tout le monde. Du minibus à l&apos;autocar grand tourisme,
           de 1 à 85 passagers.
         </p>
@@ -113,10 +114,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div style={{ display: "flex", gap: 13, flexWrap: "wrap" }}>
-          <Link href="/devis" style={ctaDark}>Simuler mon devis →</Link>
-          <Link href="/chat" style={ctaOutline}>Parler à l&apos;assistant</Link>
-        </div>
+        <HeroChatInput />
       </section>
 
       {/* BOARD STRIP */}
@@ -154,7 +152,7 @@ export default function Home() {
 
         <div style={{ border: "2px solid var(--bd)" }}>
           <div style={{ background: "var(--navy)", color: "#fff", padding: "11px 16px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-            <span style={{ fontWeight: 800, fontSize: 14, textTransform: "uppercase", letterSpacing: ".03em" }}>Devis — exemple</span>
+            <span style={{ fontWeight: 800, fontSize: 14, textTransform: "uppercase", letterSpacing: ".03em" }}>Devis · exemple</span>
             <span style={{ fontFamily: mono, fontSize: 11, color: "var(--accent)" }}>#NT-4471</span>
           </div>
           <div style={{ padding: 18, fontFamily: mono, fontSize: 13, fontWeight: 500, background: "var(--bg)" }}>
@@ -162,7 +160,7 @@ export default function Home() {
               ["Base · 100 km", "580,00 €", false],
               ["Aller-retour ×2", "+ 580,00 €", true],
               ["Marge +15 %", "+ 174,00 €", true],
-              ["Capacité 49 pers.", "— 0,00 €", false],
+              ["Capacité 49 pers.", "0,00 €", false],
             ].map(([l, v, bold]) => (
               <div key={l as string} style={{ display: "flex", justifyContent: "space-between", padding: "6px 0" }}>
                 <span>{l}</span>
@@ -184,12 +182,12 @@ export default function Home() {
         </div>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(280px,1fr))", gap: 20 }}>
           <ToolCard href="/devis" glyph="=" title="Le simulateur" cta="Ouvrir le simulateur →">
-            Trajet, groupe, options. Le devis se recompose en direct, ligne par ligne — vous voyez
+            Trajet, groupe, options. Le devis se recompose en direct, ligne par ligne, vous voyez
             d&apos;où vient chaque euro.
           </ToolCard>
-          <ToolCard href="/chat" glyph="~" title="L'assistant" cta="Parler à l'assistant →">
+          <ToolCard href="/chat" glyph="~" title="Devis en 1 phrase" cta="Décrire mon besoin →">
             Décrivez en une phrase. Il qualifie, complète, puis interroge le{" "}
-            <strong>même moteur déterministe</strong> — jamais d&apos;invention.
+            <strong>même moteur déterministe</strong>, jamais d&apos;invention.
           </ToolCard>
         </div>
       </section>
@@ -242,15 +240,6 @@ export default function Home() {
     </div>
   );
 }
-
-const ctaDark: React.CSSProperties = {
-  background: "var(--navy)", color: "#fff", padding: "15px 26px", fontSize: 15, fontWeight: 700,
-  textTransform: "uppercase", letterSpacing: ".02em", textDecoration: "none",
-};
-const ctaOutline: React.CSSProperties = {
-  background: "var(--bg)", color: "var(--ink)", padding: "15px 26px", fontSize: 15, fontWeight: 700,
-  textTransform: "uppercase", letterSpacing: ".02em", border: "2px solid var(--bd)", textDecoration: "none",
-};
 
 function ToolCard({ href, glyph, title, cta, children }: { href: string; glyph: string; title: string; cta: string; children: React.ReactNode }) {
   return (
