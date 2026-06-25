@@ -40,6 +40,8 @@ yarn-error.log*
 # références design & docs locales (non versionnées)
 /claudedocs/
 /# Direction artistique*/
+/*.pdf
+/IMG_*
 
 # typescript
 *.tsbuildinfo
