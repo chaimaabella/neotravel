@@ -53,8 +53,11 @@ export async function POST(request) {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
+        // Le workflow n8n keye la mémoire sur body.sessionId (camelCase) et lit le
+        // message du prospect ; on envoie plusieurs alias pour coller à sa config.
+        sessionId: body?.session_id,
         message,
-        session_id: body?.session_id,
+        chatInput: message,
         history: Array.isArray(body?.history) ? body.history : undefined,
       }),
       signal: controller.signal,

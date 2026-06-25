@@ -179,9 +179,9 @@ function mapReply(data: unknown): Msg[] {
     ];
   }
 
-  if (d.statut === "cas_complexe") {
+  if (d.statut === "cas_complexe" || d.statut === "cas_incomplet_escalade") {
     return [
-      { id: nid(), kind: "complex", text: msg || "Votre demande nécessite une étude personnalisée.", ref: `#NT-CX-${Math.floor(1000 + Math.random() * 9000)}` },
+      { id: nid(), kind: "complex", text: msg || "Votre demande est transmise à un conseiller NeoTravel.", ref: `#NT-CX-${Math.floor(1000 + Math.random() * 9000)}` },
     ];
   }
 
