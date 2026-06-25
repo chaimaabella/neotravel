@@ -31,7 +31,7 @@ export default function AProposPage() {
     <div>
       {/* INTRO */}
       <section style={{ ...wrap, padding: "clamp(40px,6vw,64px) clamp(16px,4vw,40px) clamp(24px,3vw,32px)" }} className="nt-rise">
-        <span style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "var(--accent)", color: "var(--navy)", padding: "8px 13px", fontSize: 12, fontWeight: 800, textTransform: "uppercase", letterSpacing: ".03em", marginBottom: 22 }}>
+        <span className="nt-r-sm" style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "var(--accent)", color: "var(--navy)", padding: "8px 13px", fontSize: 12, fontWeight: 800, textTransform: "uppercase", letterSpacing: ".03em", marginBottom: 22 }}>
           À propos
         </span>
         <h1 style={{ fontWeight: 800, fontSize: "clamp(30px,5.4vw,56px)", lineHeight: 1, letterSpacing: "-.02em", textTransform: "uppercase", margin: "0 0 20px", maxWidth: 820 }}>
@@ -46,7 +46,7 @@ export default function AProposPage() {
 
       {/* PRINCIPES */}
       <section style={{ ...wrap, padding: "clamp(16px,3vw,28px) clamp(16px,4vw,40px) clamp(36px,5vw,52px)" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(260px,1fr))", border: "2px solid var(--bd)" }}>
+        <div className="nt-r-md nt-clip" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(260px,1fr))", border: "2px solid var(--bd)" }}>
           {PRINCIPES.map(([t, d], i) => (
             <div key={t} className="nt-card" style={{ padding: 24, borderRight: i < 2 ? "2px solid var(--line)" : undefined }}>
               <div style={{ fontFamily: mono, fontSize: 12, fontWeight: 700, paddingBottom: 8, marginBottom: 12, borderBottom: "2px solid var(--accent)", textTransform: "uppercase" }}>{t}</div>
@@ -84,8 +84,8 @@ export default function AProposPage() {
         </p>
         <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
           {EQUIPE.map((nom) => (
-            <div key={nom} className="nt-card" style={{ display: "flex", alignItems: "center", gap: 12, border: "2px solid var(--bd)", padding: "12px 16px" }}>
-              <span style={{ width: 34, height: 34, background: "var(--accent)", color: "var(--navy)", border: "2px solid var(--navy)", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 900, fontSize: 15 }}>
+            <div key={nom} className="nt-card nt-r-md" style={{ display: "flex", alignItems: "center", gap: 12, border: "2px solid var(--bd)", padding: "12px 16px" }}>
+              <span className="nt-r-sm" style={{ width: 34, height: 34, background: "var(--accent)", color: "var(--navy)", border: "2px solid var(--navy)", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 900, fontSize: 15 }}>
                 {nom[0]}
               </span>
               <span style={{ fontWeight: 700, fontSize: 15 }}>{nom}</span>
@@ -96,16 +96,16 @@ export default function AProposPage() {
 
       {/* CTA */}
       <section style={{ ...wrap, padding: "clamp(20px,3vw,28px) clamp(16px,4vw,40px) clamp(48px,6vw,72px)" }}>
-        <div style={{ border: "2px solid var(--bd)", background: "var(--surface)", padding: "clamp(24px,4vw,40px)", display: "flex", gap: 20, flexWrap: "wrap", alignItems: "center", justifyContent: "space-between" }}>
+        <div className="nt-r-md" style={{ border: "2px solid var(--bd)", background: "var(--surface)", padding: "clamp(24px,4vw,40px)", display: "flex", gap: 20, flexWrap: "wrap", alignItems: "center", justifyContent: "space-between" }}>
           <div>
             <div style={{ fontWeight: 800, fontSize: "clamp(20px,3vw,28px)", textTransform: "uppercase", letterSpacing: "-.01em" }}>Un trajet en tête ?</div>
             <p style={{ fontSize: 15, color: "var(--muted)", margin: "6px 0 0", fontWeight: 500 }}>Obtenez un prix tout de suite, en une phrase ou via le simulateur.</p>
           </div>
           <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-            <OpenAssistantButton className="nt-btn" style={{ background: "var(--accent)", color: "var(--navy)", padding: "14px 24px", fontSize: 14, fontWeight: 800, textTransform: "uppercase", letterSpacing: ".02em", border: "2px solid var(--navy)" }}>
+            <OpenAssistantButton className="nt-btn nt-r-sm" style={{ background: "var(--accent)", color: "var(--navy)", padding: "14px 24px", fontSize: 14, fontWeight: 800, textTransform: "uppercase", letterSpacing: ".02em", border: "2px solid var(--navy)" }}>
               Devis en 1 phrase →
             </OpenAssistantButton>
-            <Link href="/devis" className="nt-btn" style={{ background: "var(--bg)", color: "var(--ink)", padding: "14px 24px", fontSize: 14, fontWeight: 800, textTransform: "uppercase", letterSpacing: ".02em", border: "2px solid var(--bd)", textDecoration: "none" }}>
+            <Link href="/devis" className="nt-btn nt-r-sm" style={{ background: "var(--bg)", color: "var(--ink)", padding: "14px 24px", fontSize: 14, fontWeight: 800, textTransform: "uppercase", letterSpacing: ".02em", border: "2px solid var(--bd)", textDecoration: "none" }}>
               Ouvrir le simulateur →
             </Link>
           </div>

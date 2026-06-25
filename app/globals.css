@@ -21,6 +21,10 @@
   --ok: #00853e;
   --warn: #e6a700;
   --danger: #e4002b;
+  /* Échelle de rayons (DA harmonisée : tout légèrement arrondi) */
+  --r-sm: 6px;
+  --r-md: 10px;
+  --r-lg: 18px;
 }
 
 html.dark {
@@ -63,6 +67,29 @@ body {
 
 .nt-num {
   font-variant-numeric: tabular-nums;
+}
+
+/* Arrondi global des champs (les pilules du chat gardent leur radius inline) */
+input[type="text"],
+input[type="date"],
+input[type="number"],
+select,
+textarea {
+  border-radius: var(--r-sm);
+}
+
+/* Utilitaires de rayon (à poser sur les surfaces/cartes/boutons nets) */
+.nt-r-sm {
+  border-radius: var(--r-sm);
+}
+.nt-r-md {
+  border-radius: var(--r-md);
+}
+.nt-r-lg {
+  border-radius: var(--r-lg);
+}
+.nt-clip {
+  overflow: hidden;
 }
 
 input::placeholder,
@@ -201,5 +228,25 @@ input[type="range"]::-moz-range-thumb {
 @media (max-width: 880px) {
   .nt-landing-chat {
     grid-template-columns: 1fr;
+  }
+}
+
+/* Header responsive : la nav passe sur sa propre ligne sous le logo + actions */
+@media (max-width: 760px) {
+  .nt-header-inner {
+    flex-wrap: wrap;
+    row-gap: 10px;
+  }
+  .nt-nav {
+    order: 3;
+    flex-basis: 100%;
+    justify-content: center;
+    gap: 18px;
+  }
+}
+@media (max-width: 420px) {
+  .nt-cta-full {
+    font-size: 11.5px;
+    padding: 8px 12px;
   }
 }

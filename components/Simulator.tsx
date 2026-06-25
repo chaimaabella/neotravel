@@ -202,7 +202,7 @@ export function Simulator() {
         </span>
       </div>
 
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(330px,1fr))", border: "2px solid var(--bd)" }}>
+      <div className="nt-r-lg nt-clip" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(330px,1fr))", border: "2px solid var(--bd)" }}>
         {/* FORM */}
         <div className="nt-noprint" style={{ padding: "clamp(22px,3vw,32px)", borderRight: "2px solid var(--bd)", background: "var(--bg)" }}>
           <div style={{ marginBottom: 26 }}>
@@ -234,15 +234,15 @@ export function Simulator() {
             </div>
             <div>
               <label style={{ display: "block", fontWeight: 800, fontSize: 13, textTransform: "uppercase", marginBottom: 10 }}>Trajet</label>
-              <div style={{ display: "flex", border: "2px solid var(--bd)", overflow: "hidden", height: 44 }}>
+              <div className="nt-r-sm nt-clip" style={{ display: "flex", border: "2px solid var(--bd)", height: 44 }}>
                 <button onClick={() => patch({ roundTrip: false })} style={tripBtn(!sim.roundTrip)}>Simple</button>
                 <button onClick={() => patch({ roundTrip: true })} style={{ ...tripBtn(sim.roundTrip), borderLeft: "2px solid var(--bd)" }}>A/R</button>
               </div>
             </div>
           </div>
 
-          <div style={{ background: "var(--accent)", border: "2px solid var(--navy)", padding: "13px 15px", marginBottom: 26, display: "flex", alignItems: "center", gap: 13 }}>
-            <div style={{ width: 38, height: 38, background: "var(--navy)", color: "var(--accent)", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 900, fontSize: 22, flexShrink: 0 }}>!</div>
+          <div className="nt-r-md" style={{ background: "var(--accent)", border: "2px solid var(--navy)", padding: "13px 15px", marginBottom: 26, display: "flex", alignItems: "center", gap: 13 }}>
+            <div className="nt-r-sm" style={{ width: 38, height: 38, background: "var(--navy)", color: "var(--accent)", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 900, fontSize: 22, flexShrink: 0 }}>!</div>
             <div style={{ color: "var(--navy)" }}>
               <div style={{ fontWeight: 800, fontSize: 14, textTransform: "uppercase" }}>Urgence · {urg.label}</div>
               <div style={{ fontSize: 12.5, fontWeight: 500 }}>Déduite automatiquement : {urg.note}</div>
@@ -256,9 +256,9 @@ export function Simulator() {
           </div>
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, alignItems: "end" }}>
             <NumField label="Nuits chauffeur" value={sim.driverNights} min={0} max={20} onChange={(v) => patch({ driverNights: v })} />
-            <button onClick={() => patch({ tollsIncluded: !sim.tollsIncluded })} style={{ cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "space-between", padding: "11px 13px", border: "2px solid var(--bd)", background: "var(--field)", height: 42 }}>
+            <button onClick={() => patch({ tollsIncluded: !sim.tollsIncluded })} className="nt-r-sm" style={{ cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "space-between", padding: "11px 13px", border: "2px solid var(--bd)", background: "var(--field)", height: 42 }}>
               <span style={{ fontSize: 12, fontWeight: 700, textTransform: "uppercase", color: "var(--ink)" }}>Péages</span>
-              <span style={{ fontFamily: mono, fontSize: 11.5, fontWeight: 700, padding: "4px 10px", background: sim.tollsIncluded ? "var(--ok)" : "var(--line)", color: sim.tollsIncluded ? "#fff" : "var(--muted)" }}>
+              <span className="nt-r-sm" style={{ fontFamily: mono, fontSize: 11.5, fontWeight: 700, padding: "4px 10px", background: sim.tollsIncluded ? "var(--ok)" : "var(--line)", color: sim.tollsIncluded ? "#fff" : "var(--muted)" }}>
                 {sim.tollsIncluded ? "Inclus" : "Exclu"}
               </span>
             </button>
@@ -325,7 +325,7 @@ export function Simulator() {
                 </>
               )}
 
-              <div style={{ marginTop: 16, border: "2px solid var(--bd)", background: "var(--bg)" }}>
+              <div className="nt-r-md nt-clip" style={{ marginTop: 16, border: "2px solid var(--bd)", background: "var(--bg)" }}>
                 <div style={{ display: "flex", justifyContent: "space-between", padding: "10px 15px" }}>
                   <span style={{ fontSize: 13.5, fontWeight: 700 }}>Sous-total HT</span>
                   <span className="nt-num" style={{ fontFamily: mono, fontSize: 15, fontWeight: 700 }}>{result.ht}</span>
@@ -343,15 +343,15 @@ export function Simulator() {
           )}
 
           <div className="nt-noprint" style={{ display: "flex", gap: 10, marginTop: 18, flexWrap: "wrap" }}>
-            <button style={{ flex: 1, minWidth: 120, background: "var(--accent)", color: "var(--navy)", textAlign: "center", padding: 14, fontSize: 14, fontWeight: 800, textTransform: "uppercase", border: "2px solid var(--navy)", cursor: "pointer" }}>Valider →</button>
-            <button onClick={copyRef} style={ledgerBtn}>{copied ? "✓ Copié" : "Copier réf."}</button>
-            <button onClick={() => window.print()} style={ledgerBtn}>Imprimer</button>
+            <button className="nt-btn nt-r-sm" style={{ flex: 1, minWidth: 120, background: "var(--accent)", color: "var(--navy)", textAlign: "center", padding: 14, fontSize: 14, fontWeight: 800, textTransform: "uppercase", border: "2px solid var(--navy)", cursor: "pointer" }}>Valider →</button>
+            <button onClick={copyRef} className="nt-btn" style={ledgerBtn}>{copied ? "✓ Copié" : "Copier réf."}</button>
+            <button onClick={() => window.print()} className="nt-btn" style={ledgerBtn}>Imprimer</button>
           </div>
         </div>
       </div>
 
       {copied && (
-        <div style={{ position: "fixed", bottom: 24, left: "50%", transform: "translateX(-50%)", background: "var(--ok)", color: "#fff", padding: "12px 20px", fontWeight: 800, fontSize: 13, textTransform: "uppercase", zIndex: 50, boxShadow: "0 8px 24px rgba(0,0,0,.25)" }}>
+        <div className="nt-r-sm" style={{ position: "fixed", bottom: 24, left: "50%", transform: "translateX(-50%)", background: "var(--ok)", color: "#fff", padding: "12px 20px", fontWeight: 800, fontSize: 13, textTransform: "uppercase", zIndex: 50, boxShadow: "0 8px 24px rgba(0,0,0,.25)" }}>
           ✓ Référence copiée
         </div>
       )}
@@ -370,6 +370,7 @@ function tripBtn(active: boolean): React.CSSProperties {
 const ledgerBtn: React.CSSProperties = {
   background: "var(--bg)", color: "var(--ink)", textAlign: "center", padding: "14px 16px",
   fontSize: 13, fontWeight: 800, textTransform: "uppercase", border: "2px solid var(--bd)", cursor: "pointer",
+  borderRadius: "var(--r-sm)",
 };
 
 function NumField({ label, value, min, max, onChange }: { label: string; value: number; min: number; max: number; onChange: (v: number) => void }) {

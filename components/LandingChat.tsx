@@ -48,7 +48,7 @@ export function LandingChat() {
 
   return (
     <div className="nt-landing-chat">
-      <div style={{ height: "min(64vh, 560px)", minHeight: 420 }}>
+      <div style={{ height: "min(58vh, 480px)", minHeight: 400 }}>
         <ChatPanel onReply={onReply} />
       </div>
       <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>

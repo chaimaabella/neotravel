@@ -18,7 +18,7 @@ const MARK: Record<FieldStatus, { sign: string; color: string }> = {
 /** Checklist live des informations collectées vs manquantes (wireframe 2 du cadrage). */
 export function DetectedInfo({ fields }: { fields: DetectedField[] }) {
   return (
-    <div style={{ border: "2px solid var(--bd)", background: "var(--bg)" }}>
+    <div className="nt-r-md nt-clip" style={{ border: "2px solid var(--bd)", background: "var(--bg)" }}>
       <div style={{ background: "var(--navy)", color: "#fff", padding: "10px 15px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
         <span style={{ fontWeight: 800, fontSize: 13.5, textTransform: "uppercase", letterSpacing: ".03em" }}>Informations détectées</span>
         <span style={{ fontFamily: mono, fontSize: 11, color: "var(--accent)" }}>

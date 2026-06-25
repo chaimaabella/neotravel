@@ -18,6 +18,7 @@ export default function Home() {
         }}
       >
         <div
+          className="nt-r-sm"
           style={{
             display: "inline-flex",
             alignItems: "center",
@@ -124,13 +125,13 @@ export default function Home() {
             saison, urgence, capacité, options. Puis TVA et TTC.
           </p>
           <div style={{ display: "flex", gap: 9, flexWrap: "wrap" }}>
-            <span style={{ background: "var(--navy)", color: "#fff", padding: "6px 12px", fontFamily: mono, fontSize: 11, fontWeight: 700 }}>CASCADE</span>
-            <span style={{ background: "var(--accent)", color: "var(--navy)", padding: "6px 12px", fontFamily: mono, fontSize: 11, fontWeight: 700 }}>RÉF. VÉRIFIABLE</span>
-            <span style={{ border: "2px solid var(--bd)", padding: "5px 11px", fontFamily: mono, fontSize: 11, fontWeight: 700 }}>AUDITABLE</span>
+            <span className="nt-r-sm" style={{ background: "var(--navy)", color: "#fff", padding: "6px 12px", fontFamily: mono, fontSize: 11, fontWeight: 700 }}>CASCADE</span>
+            <span className="nt-r-sm" style={{ background: "var(--accent)", color: "var(--navy)", padding: "6px 12px", fontFamily: mono, fontSize: 11, fontWeight: 700 }}>RÉF. VÉRIFIABLE</span>
+            <span className="nt-r-sm" style={{ border: "2px solid var(--bd)", padding: "5px 11px", fontFamily: mono, fontSize: 11, fontWeight: 700 }}>AUDITABLE</span>
           </div>
         </div>
 
-        <div className="nt-card" style={{ border: "2px solid var(--bd)" }}>
+        <div className="nt-card nt-r-md nt-clip" style={{ border: "2px solid var(--bd)" }}>
           <div style={{ background: "var(--navy)", color: "#fff", padding: "11px 16px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
             <span style={{ fontWeight: 800, fontSize: 14, textTransform: "uppercase", letterSpacing: ".03em" }}>Devis · exemple</span>
             <span style={{ fontFamily: mono, fontSize: 11, color: "var(--accent)" }}>#NT-4471</span>
@@ -161,13 +162,13 @@ export default function Home() {
           Deux outils, un seul moteur
         </div>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(280px,1fr))", gap: 20 }}>
-          <Link href="/devis" className="nt-card" style={cardBox}>
+          <Link href="/devis" className="nt-card nt-r-md" style={cardBox}>
             <ToolInner glyph="=" title="Le simulateur" cta="Ouvrir le simulateur →">
               Trajet, groupe, options. Le devis se recompose en direct, ligne par ligne, vous voyez
               d&apos;où vient chaque euro.
             </ToolInner>
           </Link>
-          <OpenAssistantButton className="nt-card" style={{ ...cardBox, textAlign: "left", width: "100%" }}>
+          <OpenAssistantButton className="nt-card nt-r-md" style={{ ...cardBox, textAlign: "left", width: "100%" }}>
             <ToolInner glyph="~" title="Devis en 1 phrase" cta="Décrire mon besoin →">
               Décrivez en une phrase. Il qualifie, complète, puis interroge le{" "}
               <strong>même moteur déterministe</strong>, jamais d&apos;invention.
@@ -203,7 +204,7 @@ export default function Home() {
         <div style={{ fontWeight: 800, fontSize: "clamp(24px,3.4vw,34px)", textTransform: "uppercase", letterSpacing: "-.02em", marginBottom: 22 }}>
           Les coefficients, en clair
         </div>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(240px,1fr))", border: "2px solid var(--bd)" }}>
+        <div className="nt-r-md nt-clip" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(240px,1fr))", border: "2px solid var(--bd)" }}>
           <CoeffCell title="SAISONNALITÉ">
             Mai–juin : <Strong>+15 %</Strong>
             <br />Mars/avr./juil. : +10 %
@@ -237,7 +238,7 @@ const cardBox: React.CSSProperties = {
 function ToolInner({ glyph, title, cta, children }: { glyph: string; title: string; cta: string; children: React.ReactNode }) {
   return (
     <>
-      <div style={{ display: "inline-flex", width: 44, height: 44, background: "var(--accent)", border: "2px solid var(--navy)", color: "var(--navy)", alignItems: "center", justifyContent: "center", fontWeight: 900, fontSize: 24, marginBottom: 16 }}>
+      <div className="nt-r-sm" style={{ display: "inline-flex", width: 44, height: 44, background: "var(--accent)", border: "2px solid var(--navy)", color: "var(--navy)", alignItems: "center", justifyContent: "center", fontWeight: 900, fontSize: 24, marginBottom: 16 }}>
         {glyph}
       </div>
       <div style={{ fontWeight: 800, fontSize: 22, textTransform: "uppercase", marginBottom: 10 }}>{title}</div>

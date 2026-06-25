@@ -40,6 +40,7 @@ export function SiteHeader() {
       }}
     >
       <div
+        className="nt-header-inner"
         style={{
           width: "min(1160px,100%)",
           margin: "0 auto",
@@ -52,6 +53,7 @@ export function SiteHeader() {
       >
         <Link href="/" style={{ display: "flex", alignItems: "center", gap: 10, textDecoration: "none", color: "var(--ink)" }}>
           <div
+            className="nt-r-sm"
             style={{
               width: 32,
               height: 32,
@@ -71,6 +73,7 @@ export function SiteHeader() {
         </Link>
 
         <nav
+          className="nt-nav"
           style={{
             display: "flex",
             alignItems: "center",
@@ -105,6 +108,7 @@ export function SiteHeader() {
           <button
             onClick={toggleTheme}
             title="Basculer clair / sombre"
+            className="nt-r-sm nt-btn"
             style={{
               display: "flex",
               alignItems: "center",
@@ -122,7 +126,7 @@ export function SiteHeader() {
             {dark ? "☀ Clair" : "☾ Sombre"}
           </button>
           <OpenAssistantButton
-            className="nt-btn"
+            className="nt-btn nt-r-sm nt-cta-full"
             style={{
               background: "var(--accent)",
               color: "var(--navy)",
